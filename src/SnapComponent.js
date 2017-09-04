@@ -1,6 +1,4 @@
 import React, { Component } from 'react';
-import ReactDOM from 'react-dom';
-import { Button } from 'react-bootstrap';
 const UI_IMAGES_BASE_URL = 'https://s3.us-east-2.amazonaws.com/swiftmile-app-assets/';
 
 export default class SnapComponent extends Component {
@@ -31,7 +29,7 @@ export default class SnapComponent extends Component {
         {
           this.state.snaps.map((snap) => (
             <div
-              key={snap.key}
+              key={snap.id}
             >
               <img
                 alt=""

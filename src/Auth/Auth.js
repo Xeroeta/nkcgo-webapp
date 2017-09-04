@@ -27,10 +27,11 @@ export default class Auth {
 
   handleAuthentication() {
     this.auth0.parseHash((err, authResult) => {
-      console.log('authResult');
-      console.log(authResult);
       
       if (authResult && authResult.accessToken && authResult.idToken) {
+        console.log('Setting Session - authResult');
+        console.log(authResult);
+        
         this.setSession(authResult);
         history.replace('/home');
       } else if (err) {
@@ -52,6 +53,7 @@ export default class Auth {
   }
 
   logout() {
+    console.log("Inside logout");
     // Clear access token and ID token from local storage
     localStorage.removeItem('access_token');
     localStorage.removeItem('id_token');
@@ -60,6 +62,9 @@ export default class Auth {
     history.replace('/home');
   }
 
+  getIdToken() {
+    return localStorage.getItem('id_token');
+  }
   isAuthenticated() {
     // Check whether the current time is past the 
     // access token's expiry time

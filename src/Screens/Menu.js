@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-import { Navbar, Button } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 
 class Menu extends Component {
   goTo(route) {
@@ -8,8 +8,10 @@ class Menu extends Component {
   }
 
   componentWillMount() {
-    
+    // console.log('Menu Page Id token');
+    // console.log(this.props.auth.getIdToken());
   }
+  
   render() {
     return (
       <div className="container">

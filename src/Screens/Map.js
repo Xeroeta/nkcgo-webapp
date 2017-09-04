@@ -5,16 +5,15 @@ import history from '../history';
 
 import { poiClusters } from '../Config/sampleMapClusters';
 import { googlemaps, auth0 } from '../Config/params';
-// import params from '../Config/params';
 
-
-// console.log(params);
 const map_key = googlemaps.key;
 const POIClustersData = poiClusters;
+const DEFAULT_PADDING = { top: 40, right: 40, bottom: 40, left: 40 };
 export class MapContainer extends React.Component {
 
   constructor(props) {
     super(props);
+    // const window_google_instance = this.props.google;
     this.state = { width: '0', height: '0' };
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
 
@@ -100,6 +99,8 @@ export class MapContainer extends React.Component {
   };
 
   componentDidMount() {
+    // this.state.markerPoint = new window.google.maps.Point(32,32);
+    // this.state.markerSize = new window.google.maps.Size(64,64);
     this.updateWindowDimensions();
     window.addEventListener('resize', this.updateWindowDimensions);
   }
@@ -112,12 +113,47 @@ export class MapContainer extends React.Component {
     this.setState({ width: window.innerWidth, height: window.innerHeight });
   }
 
+  onPolygonClick(e, polygon_key)
+  {
+    // alert(polygon_key);
+    console.log("Polygon key - ");
+    console.log(polygon_key);
+    let selected_polygon = null;
+    
+    for (var i = POIClustersData.length - 1; i >= 0; i--) {
+      if(POIClustersData[i].polygon.key==polygon_key)
+      {
+        selected_polygon = POIClustersData[i];
+      }
+    }
+    if(selected_polygon)
+    {
+      this.fitPolygonToScreen(selected_polygon);
+    }
+    else
+    {
+      console.log("No selected polygon found.");
+    }
+    
+  }
+
   onMarkerClick(e, venue_key)
   {
     // alert(venue_key);
     console.log(this.props);
     // this.props.params = {currentVenueId: venue_key};
     history.replace('/venue',{venue_key:venue_key});
+  }
+
+  /**
+   * Fit map to polygon coordinates
+   */
+  fitPolygonToScreen(polygon)
+  {
+    this.map.fitToCoordinates(polygon.polygonOverlay.coordinates, {
+      edgePadding: DEFAULT_PADDING,
+      animated: true,
+    });
   }
 
   onMapClicked(e)
@@ -127,8 +163,12 @@ export class MapContainer extends React.Component {
   }
 
   render() {
+         // markerPoint = new this.props.google.maps.Point(32,32)
+         // markerSize = new this.props.google.maps.Size(64,64)
+
     return (
       <Map 
+        ref={ref => { this.map = ref; }}
         google={this.props.google} 
         zoom={17}
         style={style}
@@ -140,6 +180,7 @@ export class MapContainer extends React.Component {
 
 
       {
+
         this.mapMarkers.map(marker => (
           <Marker
             key={marker.venueID}
@@ -148,8 +189,8 @@ export class MapContainer extends React.Component {
             onClick={e => this.onMarkerClick(e, marker.venueID)}
             icon={{
               url: marker.markerImage,
-              width: 20,
-              height:20
+              anchor: {x: parseFloat(32), y: parseFloat(32)},
+              scaledSize: {widht: parseFloat(64), height: parseFloat(64), f: "px", j: "px"}
             }}
           >
             
@@ -161,6 +202,7 @@ export class MapContainer extends React.Component {
         this.polygons.map(polygon => (
           <Polygon
             key={polygon.polygon.key}
+            onClick={e => this.onPolygonClick(e, polygon.polygon.key)}
             paths={polygon.polygonOverlay.coordinates}
             strokeColor="#00FFFF"
             strokeOpacity={0.8}
