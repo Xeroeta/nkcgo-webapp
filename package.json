@@ -1,5 +1,5 @@
 {
-  "name": "centralized-login",
+  "name": "NKCGo",
   "version": "0.1.0",
   "private": true,
   "devDependencies": {
@@ -7,6 +7,7 @@
   },
   "dependencies": {
     "auth0-js": "^8.8.0",
+    "axios": "^0.16.2",
     "bootstrap": "^3.3.7",
     "google-maps-react": "git+ssh://git@github.com:Xeroeta/google-maps-react.git",
     "query-string": "^5.0.0",
@@ -17,6 +18,7 @@
     "react-router-dom": "^4.1.1",
     "react-slick": "^0.15.4",
     "react-swipe": "^5.0.8",
+    "react-webcam": "^0.2.0",
     "swipe-js-iso": "^2.0.3"
   },
   "scripts": {

@@ -190,7 +190,7 @@ export class MapContainer extends React.Component {
             icon={{
               url: marker.markerImage,
               anchor: {x: parseFloat(32), y: parseFloat(32)},
-              scaledSize: {widht: parseFloat(64), height: parseFloat(64), f: "px", j: "px"}
+              scaledSize: {width: parseFloat(64), height: parseFloat(64), f: "px", j: "px"}
             }}
           >
             

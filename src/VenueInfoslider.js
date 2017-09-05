@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import ReactSwipe from 'react-swipe';
 import { Button } from 'react-bootstrap';
 
+import history from './history';
 
 export default class VenueInfoslider extends Component {
 
@@ -34,6 +35,16 @@ export default class VenueInfoslider extends Component {
     let currentVenueSliderIndex = this.val2key(this.state.currentVenueKey, nextProps.VenuesData);
     this.setState({ startSlide: currentVenueSliderIndex });
     
+  }
+
+  showMapDirections(e, venue_key)
+  {
+    alert("Redirect to Google Maps!");
+  }
+
+  showCameraScreen(e, venue_key)
+  {
+    history.replace('/camera',{venue_key:venue_key});
   }
 
   goTo(route) {
@@ -79,7 +90,7 @@ export default class VenueInfoslider extends Component {
                     <Button
                       bsStyle="primary"
                       className="btn-margin"
-                      onClick={this.goTo.bind(this, 'venue')}
+                      onClick={e => this.showCameraScreen(e, venue.venueID)}
                     >
                       CheckIn here
                     </Button>
@@ -90,7 +101,7 @@ export default class VenueInfoslider extends Component {
                     <Button
                       bsStyle="primary"
                       className="btn-margin"
-                      onClick={this.goTo.bind(this, 'venue')}
+                      onClick={e => this.showMapDirections(e, venue.venueID)}
                     >
                       Get directions to this venue
                     </Button>
