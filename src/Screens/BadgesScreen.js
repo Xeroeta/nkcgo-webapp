@@ -15,6 +15,9 @@ export default class BadgesScreen extends Component {
     };
   }
 
+  login() {
+    this.props.auth.login();
+  }
   componentDidMount() {
     const { isAuthenticated } = this.props.auth;
     var auth_data = isAuthenticated();

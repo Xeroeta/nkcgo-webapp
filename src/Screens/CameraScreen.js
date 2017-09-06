@@ -71,7 +71,10 @@ export default class CameraScreen extends React.Component {
 
   uploadImage(imageSrc)
   {
-
+    if(!imageSrc)
+    {
+      return;
+    }
     const { isAuthenticated } = this.props.auth;
     const { getIdToken } = this.props.auth;
     var auth_data = isAuthenticated();
@@ -124,6 +127,7 @@ export default class CameraScreen extends React.Component {
           .then((responseData) => { 
             console.log(JSON.parse(responseData.body));
             // return JSON.parse(responseData.body);
+            this.props.history.goBack();
           });
       })
       .catch((err) => { 
