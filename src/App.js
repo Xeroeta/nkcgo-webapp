@@ -26,7 +26,9 @@ class App extends Component {
         <Navbar fluid>
           <Navbar.Header>
             <Navbar.Brand>
-              <a href="#">NKCGo-- - React</a>
+              <a 
+              onClick={this.goTo.bind(this, 'menu')}
+              >Menu</a>
             </Navbar.Brand>
             <Button
               bsStyle="primary"
