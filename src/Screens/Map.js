@@ -22,8 +22,8 @@ export class MapContainer extends React.Component {
     this.state.selectedCluster = 0;
     this.polygons = poiClusters;
     this.initialRegion = {
-            lat: 39.143828,
-            lng: -94.573043
+            lat: 39.135452,
+            lng: -94.577164
           };
   }
 
@@ -55,7 +55,7 @@ export class MapContainer extends React.Component {
    * if yes return that polygon
    * else return false
    */
-  pointInPloygons(point) 
+  pointInPloygons(point)
   {
     var tmpFlag = false;
     for (var i = POIClustersData.length - 1; i >= 0; i--) {
@@ -82,19 +82,19 @@ export class MapContainer extends React.Component {
   pointInPoly(point, polygon) {
       // ray-casting algorithm based on
       // http://www.ecse.rpi.edu/Homepages/wrf/Research/Short_Notes/pnpoly.html
-      
+
       var x = point.latitude, y = point.longitude;
-      
+
       var inside = false;
       for (var i = 0, j = polygon.length - 1; i < polygon.length; j = i++) {
           var xi = polygon[i].latitude, yi = polygon[i].longitude;
           var xj = polygon[j].latitude, yj = polygon[j].longitude;
-          
+
           var intersect = ((yi > y) != (yj > y))
               && (x < (xj - xi) * (y - yi) / (yj - yi) + xi);
           if (intersect) inside = !inside;
       }
-      
+
       return inside;
   };
 
@@ -119,7 +119,7 @@ export class MapContainer extends React.Component {
     console.log("Polygon key - ");
     console.log(polygon_key);
     let selected_polygon = null;
-    
+
     for (var i = POIClustersData.length - 1; i >= 0; i--) {
       if(POIClustersData[i].polygon.key==polygon_key)
       {
@@ -134,7 +134,7 @@ export class MapContainer extends React.Component {
     {
       console.log("No selected polygon found.");
     }
-    
+
   }
 
   onMarkerClick(e, venue_key)
@@ -167,10 +167,10 @@ export class MapContainer extends React.Component {
          // markerSize = new this.props.google.maps.Size(64,64)
 
     return (
-      <Map 
+      <Map
         ref={ref => { this.map = ref; }}
-        google={this.props.google} 
-        zoom={17}
+        google={this.props.google}
+        zoom={15}
         style={style}
         initialCenter={this.initialRegion}
         onClick={e => this.onMapClicked(e)}
@@ -193,7 +193,7 @@ export class MapContainer extends React.Component {
               scaledSize: {width: parseFloat(64), height: parseFloat(64), f: "px", j: "px"}
             }}
           >
-            
+
           </Marker>
           )
         )

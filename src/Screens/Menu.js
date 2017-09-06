@@ -143,8 +143,8 @@ const styles = {
     marginBottom: 40
   },
   logo: {
-    width: 125,
-    height: 125,
+    width: 150,
+    height: 150,
     paddingTop: 10,
     padding: 10,
     resizeMode: 'contain',
