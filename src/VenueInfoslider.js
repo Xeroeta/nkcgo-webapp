@@ -8,10 +8,11 @@ export default class VenueInfoslider extends Component {
 
   constructor(props) {
     super(props);
+    let currentVenueSliderIndex = this.val2key(props.currentVenueKey, props.VenuesData);
     this.state = {
       VenuesData: props.VenuesData,
       currentVenueKey: props.currentVenueKey,
-      startSlide: 0
+      startSlide: currentVenueSliderIndex
     };
     console.log('initial Props');
     console.log(props.VenuesData);
@@ -19,11 +20,23 @@ export default class VenueInfoslider extends Component {
     // this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
   }
   val2key(val, markers_array){
+    console.log("Input - markers_array");
+    console.log(markers_array);
     for (var key in markers_array) {
       let array_val = markers_array[key];
-      if(array_val.venueId === val){
-          return key;
-          break;
+      // console.log("Val = ");
+      // console.log(val);
+      // console.log("Venue id - ");
+      // console.log(array_val.venueID);      
+      if(array_val.venueID === val){
+          console.log("Returning final key - ");
+          console.log(key);
+          let int_key = parseInt(key);
+          if(int_key==NaN)
+          {
+            return 0;
+          }
+          return int_key;
       }
     }
   }
@@ -31,9 +44,11 @@ export default class VenueInfoslider extends Component {
   componentWillReceiveProps(nextProps) {
     console.log('nextProps.VenuesData');
     console.log(nextProps.VenuesData);
-    this.setState({ VenuesData: nextProps.VenuesData });
     let currentVenueSliderIndex = this.val2key(this.state.currentVenueKey, nextProps.VenuesData);
+    console.log('currentVenueSliderIndex');
+    console.log(currentVenueSliderIndex);
     this.setState({ startSlide: currentVenueSliderIndex });
+    this.setState({ VenuesData: nextProps.VenuesData });
     
   }
 
