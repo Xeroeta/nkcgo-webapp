@@ -17,6 +17,9 @@ export default class CameraScreen extends React.Component {
     this.state.successMessage = '';
 
     let venue_param = props.location.state;
+    console.log("Camera Screen: venue_param - ");
+    console.log(venue_param);
+    
     if(venue_param!==undefined && venue_param.venue_key!==undefined)
     {
       const currentVenueKey = venue_param.venue_key;
@@ -27,11 +30,13 @@ export default class CameraScreen extends React.Component {
     if(venue_param!==undefined && venue_param.venue_title!==undefined)
     {
       const currentVenueTitle = venue_param.venue_title;
-      this.state = {
-        currentVenueTitle: venue_param.venue_title
-      };
-      
+      this.state.currentVenueTitle = venue_param.venue_title;
     }
+    console.log("State param - currentVenueKey");
+    console.log(this.state.currentVenueKey);
+    console.log("State param - currentVenueTitle");
+    console.log(this.state.currentVenueTitle);
+    
   }
 
   login() {
