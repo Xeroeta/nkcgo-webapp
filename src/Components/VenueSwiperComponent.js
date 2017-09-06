@@ -4,6 +4,8 @@ import { Button } from 'react-bootstrap';
 
 import history from '../history';
 
+const GOOGLE_DIR_PREFIX = 'https://www.google.com/maps/dir/?api=1&dir_action=navigate&travelmode=walking&destination=';
+
 export default class VenueSwiperComponent extends Component {
 
   constructor(props) {
@@ -55,13 +57,20 @@ export default class VenueSwiperComponent extends Component {
   login() {
     this.props.auth.login();
   }
-  showMapDirections(e, venue_key)
+
+  showMapDirections(e, venue_key, venue_description)
   {
-    alert("Redirect to Google Maps!");
+    //alert("Redirect to Google Maps!");
+    window.location.href = GOOGLE_DIR_PREFIX+venue_description;
   }
 
   showCameraScreen(e, venue_key, venue_title)
   {
+    console.log("inside - showCameraScreen Venue_key");
+    console.log(venue_key);
+    console.log("inside - showCameraScreen venue_title");
+    console.log(venue_title);
+
     history.replace('/camera',{venue_key:venue_key, venue_title: venue_title});
   }
 
@@ -115,7 +124,7 @@ export default class VenueSwiperComponent extends Component {
           className="btn-margin"
           onClick={this.goToPreviousSlide.bind(this)}
         >
-          Previous
+          {'<<'} Previous
         </Button>
         <ReactSwipe 
           key={this.state.VenuesData.length}
@@ -128,6 +137,7 @@ export default class VenueSwiperComponent extends Component {
               className="slide-wrapper"
               key={venue.venueID}
             >
+            <center>
               <div>
                 <p >{venue.title}</p>
                 <p >{venue.description}</p>
@@ -173,14 +183,14 @@ export default class VenueSwiperComponent extends Component {
                     <Button
                       bsStyle="primary"
                       className="btn-margin"
-                      onClick={e => this.showMapDirections(e, venue.venueID)}
+                      onClick={e => this.showMapDirections(e, venue.venueID, venue.description)}
                     >
                       Get directions to this venue
                     </Button>
                   </div>
                 </div>
               </div>
-            
+            </center>
             </div>
           ))
         }
@@ -190,10 +200,23 @@ export default class VenueSwiperComponent extends Component {
           className="btn-margin"
           onClick={this.goToNextSlide.bind(this)}
         >
-          Next
+          Next {'>>'}
         </Button>
         
       </div>
     );
   }
 }
+
+const styles = {
+  venueTitle: {
+    color: '#0cf',
+    fontSize: 30,
+    fontWeight: 'bold',
+  },
+  venueDescription: {
+    color: '#0cf',
+    fontSize: 24,
+    fontWeight: 'normal',
+  }
+};

@@ -28,13 +28,16 @@ export default class BadgeComponent extends Component {
         {
           this.state.badges.map((mybadge) => (
             <div
+              style={styles.badgeInfo}
               key={mybadge.key}
             >
-              <img
-                alt=""
-                src={mybadge.image}
-              />
-              <p>{mybadge.badgeName}</p>
+              <center>
+                <img style={styles.imageBadge}
+                  alt=""
+                  src={mybadge.image}
+                />
+                <p style={styles.badgeTitle}>{mybadge.badgeName}{'\n\n'}</p>
+              </center>
             </div>
           ))
       }
@@ -42,3 +45,18 @@ export default class BadgeComponent extends Component {
     );
   }
 }
+
+const styles = {
+  imageBadge: {
+    width: screen.width/3,
+    height: screen.width/3,
+    justifyContent: 'center',
+    alignItems: 'center'
+  },
+  badgeTitle: {
+    fontSize: 20
+  },
+  badgeInfo: {
+    marginBottom: 10
+  }
+};

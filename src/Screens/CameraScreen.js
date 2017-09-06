@@ -20,6 +20,7 @@ export default class CameraScreen extends React.Component {
     console.log("Camera Screen: venue_param - ");
     console.log(venue_param);
     
+    this.state = {};
     if(venue_param!==undefined && venue_param.venue_key!==undefined)
     {
       const currentVenueKey = venue_param.venue_key;
@@ -216,7 +217,7 @@ export default class CameraScreen extends React.Component {
         :
           <span></span>
       }
-
+        <center>
         <Webcam
           audio={false}
           height={350}
@@ -224,11 +225,12 @@ export default class CameraScreen extends React.Component {
           screenshotFormat="image/jpeg"
           width={350}
         />
+        </center>
         {
           this.state.isLoading?
           <span>Updating your snap Please wait.</span>
           :
-          <button onClick={this.capture}>Capture photo</button>
+          <center><button onClick={this.capture}>Capture photo</button></center>
         }
         
       </div>

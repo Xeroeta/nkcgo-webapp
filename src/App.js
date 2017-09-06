@@ -59,7 +59,7 @@ class App extends Component {
     }
     return (
       <div>
-        <Navbar fluid>
+        <Navbar fluid style={styles.navbar}>
           <Navbar.Header>
             <Navbar.Brand>
               <a>{this.state.currentScreenTitle}</a>
@@ -130,7 +130,11 @@ const styles = {
     alignItems: 'center'
     //flex: 1,
     //alignSelf: 'stretch',
-  }
+  },
+  navbar: {
+    marginBottom: "0",
+    backgroundColor: '#fff'
+   }
 };
 
 export default App;
