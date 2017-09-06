@@ -139,14 +139,14 @@ const styles = {
   logoContainer: {
     flexDirection: 'row',
     alignItems: 'center',
-    padding: 10,
-    marginBottom: 40
+    padding: 5,
+    marginBottom: 5
   },
   logo: {
     width: 150,
     height: 150,
-    paddingTop: 10,
-    padding: 10,
+    paddingTop: 3,
+    padding: 3,
     resizeMode: 'contain',
     alignItems: 'center'
   }

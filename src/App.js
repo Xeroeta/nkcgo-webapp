@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import { Navbar, Button } from 'react-bootstrap';
 import './App.css';
 
+const UI_IMAGES_BASE_URL = 'https://s3.us-east-2.amazonaws.com/swiftmile-app-assets/ui-images/';
 class App extends Component {
   goTo(route) {
     this.props.history.replace(`/${route}`)
@@ -26,10 +27,19 @@ class App extends Component {
         <Navbar fluid>
           <Navbar.Header>
             <Navbar.Brand>
-              <a 
+              <a
               onClick={this.goTo.bind(this, 'menu')}
-              >Menu</a>
+              >
+
+              </a>
             </Navbar.Brand>
+            <a>
+              <img
+                style={ styles.btnNKCGo }
+                src={UI_IMAGES_BASE_URL+'NKCGoAppIcon3.png'}
+                onClick={this.goTo.bind(this, 'menu')}
+              />
+            </a>
             <Button
               bsStyle="primary"
               className="btn-margin"
@@ -65,5 +75,26 @@ class App extends Component {
     );
   }
 }
+
+const styles = {
+
+  btnNKCGo: {
+    width: 75,
+    height: 50,
+    //paddingTop: 30,
+    marginBottom: 5,
+    marginLeft: 5,
+    marginRight: 5,
+    borderRadius: 5,
+    borderWidth: 1,
+    borderColor: '#007aff',
+    backgroundColor: '#fff',
+    resizeMode: 'contain',
+    justifyContent: 'center',
+    alignItems: 'center'
+    //flex: 1,
+    //alignSelf: 'stretch',
+  }
+};
 
 export default App;
