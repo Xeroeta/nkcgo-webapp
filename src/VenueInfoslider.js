@@ -52,18 +52,64 @@ export default class VenueInfoslider extends Component {
     this.props.history.replace(`/${route}`)
   }
 
-  render() {
+  goToPreviousSlide()
+  {
+    console.log("Go Previous");
+    if(this.swiper)
+    {
+      console.log("Swiper initialised. Going Previous");
+      this.swiper.prev();
+    }
+    else
+    {
+      console.log("No Swiper initialised");
+    }
+  }
+  goToNextSlide()
+  {
+    console.log("Go Next");
+    if(this.swiper)
+    {
+      console.log("Swiper initialised. Going Next");
+      this.swiper.next();
+    }
+    else
+    {
+      console.log("No Swiper initialised");
+    }
+  }
 
+  render() {
+    if(!this.state.VenuesData.length)
+    {
+      return (
+        <div>
+          Loading Venue Info please wait
+        </div>
+      );
+    }
+    
     return (
-        <ReactSwipe swipeOptions={{continuous: false, startSlide: this.state.startSlide}}>
+      <div className="slider-wrapper">
+        <Button
+          bsStyle="primary"
+          className="btn-margin"
+          onClick={this.goToPreviousSlide.bind(this)}
+        >
+          Previous
+        </Button>
+        <ReactSwipe 
+          key={this.state.VenuesData.length}
+          ref={ref => { this.swiper = ref; }}
+          swipeOptions={{continuous: true, startSlide: this.state.startSlide}}
+        >
         {
           this.state.VenuesData.map(venue => (
             <div 
+              className="slide-wrapper"
               key={venue.venueID}
             >
-              <div
-                
-                >
+              <div>
                 <p >{venue.title}</p>
                 <p >{venue.description}</p>
                 <img
@@ -74,19 +120,11 @@ export default class VenueInfoslider extends Component {
                   }}
                   src={venue.markerImage}
                   />
-
               </div>
 
-              <div
-                
-              >
-                
-              </div>
-              <div
-                
-              >
-                <div className="row">
-                  <div className="center-block">
+              <div>
+                <div>
+                  <div>
                     <Button
                       bsStyle="primary"
                       className="btn-margin"
@@ -96,8 +134,8 @@ export default class VenueInfoslider extends Component {
                     </Button>
                   </div>
                 </div>
-                <div className="row">
-                  <div className="center-block">
+                <div>
+                  <div>
                     <Button
                       bsStyle="primary"
                       className="btn-margin"
@@ -110,8 +148,18 @@ export default class VenueInfoslider extends Component {
               </div>
             
             </div>
-          ))}
+          ))
+        }
         </ReactSwipe>
+        <Button
+          bsStyle="primary"
+          className="btn-margin"
+          onClick={this.goToNextSlide.bind(this)}
+        >
+          Next
+        </Button>
+        
+      </div>
     );
   }
 }
