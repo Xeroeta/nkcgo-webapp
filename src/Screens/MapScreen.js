@@ -22,8 +22,8 @@ export class MapScreen extends React.Component {
     this.state.selectedCluster = 0;
     this.polygons = poiClusters;
     this.initialRegion = {
-            lat: 39.143828,
-            lng: -94.573043
+            lat: 39.135452,
+            lng: -94.577164
           };
   }
 
@@ -170,7 +170,7 @@ export class MapScreen extends React.Component {
       <Map 
         ref={ref => { this.map = ref; }}
         google={this.props.google} 
-        zoom={17}
+        zoom={15}
         style={style}
         initialCenter={this.initialRegion}
         onClick={e => this.onMapClicked(e)}
