@@ -2,9 +2,8 @@ import React from 'react';
 import axios from 'axios';
 import Webcam from 'react-webcam';
 import history from '../history';
-const API_BASE_URL = 'https://y86lpymaph.execute-api.us-east-2.amazonaws.com/prd/';
+import appConfig from '../Config/params';
 
-//goBack()
 export default class CameraScreen extends React.Component {
 
   constructor(props) {
@@ -12,6 +11,9 @@ export default class CameraScreen extends React.Component {
     this.state = { width: '0', height: '0' };
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     this.state.currentVenueKey = null;
+    this.state.isLoading = false;
+    this.state.errorMessage = '';
+    this.state.successMessage = '';
 
     let venue_param = props.location.state;
     if(venue_param!==undefined && venue_param.venue_key!==undefined)
@@ -38,7 +40,7 @@ export default class CameraScreen extends React.Component {
     let userIdToken_temp = getIdToken();
     if(isAuthenticated())
     {
-      this.state.userAuthenticated = isAuthenticated();
+      this.setState({userAuthenticated: isAuthenticated()});
       userIdToken_temp = this.props.auth.getIdToken();
     }
     else
@@ -74,6 +76,9 @@ export default class CameraScreen extends React.Component {
   {
     if(!imageSrc)
     {
+      let errorMessage = "Failed to take a picture image. "+
+      "Please check your device compatibility";
+      this.displayErrorMessage(errorMessage);
       return;
     }
     const { isAuthenticated } = this.props.auth;
@@ -82,7 +87,7 @@ export default class CameraScreen extends React.Component {
     let userIdToken_temp = getIdToken();
     if(isAuthenticated())
     {
-      this.state.userAuthenticated = isAuthenticated();
+      this.setState({userAuthenticated: isAuthenticated()});
       userIdToken_temp = this.props.auth.getIdToken();
     }
     else
@@ -90,7 +95,7 @@ export default class CameraScreen extends React.Component {
       this.login();
     }
 
-    fetch(API_BASE_URL+'snaps_s3_signed_url',{
+    fetch(appConfig.app.API_BASE_URL+'snaps_s3_signed_url',{
       method: 'GET',
       headers: {
                 'Accept': 'application/json',
@@ -102,41 +107,61 @@ export default class CameraScreen extends React.Component {
       .then((responseData) => { 
         console.log(JSON.parse(responseData.body));
         return JSON.parse(responseData.body);
-        //JSON.parse(responseData.body)
-        // this.setState({ mybadges: JSON.parse(responseData.body) }); 
-
-      }).then((signedUrlData) => {
+      })
+      .then((signedUrlData) => {
         //Upload to S3 and save data in DB
         let bb_imageSrc =  this.dataURItoBlob(imageSrc);
-        axios.put(signedUrlData.url, bb_imageSrc, {'ContentEncoding': 'base64', 'Content-Type':'image/jpeg'}).catch((err) => { 
-              console.log(err);
-            });
-        //Save to DynamoDB
-        fetch(API_BASE_URL+'snaps',{
-            method: 'POST',
-            headers: {
-                      'Accept': 'application/json',
-                      'Content-Type': 'application/json',
-                      'Authorization': 'Bearer ' + userIdToken_temp
-                      },
-            body: JSON.stringify({
-                    image_url: signedUrlData.filename,
-                    venue: this.state.currentVenueKey
-                  })
-          })
-          .then(response => response.json())
-          .then((responseData) => { 
+        axios.put(signedUrlData.url, bb_imageSrc, {
+          'ContentEncoding': 'base64', 
+          'Content-Type':'image/jpeg'
+        })
+        .then(response => response.json())
+        .then((responseData) => {
             console.log(JSON.parse(responseData.body));
-            // return JSON.parse(responseData.body);
-            // this.props.history.goBack();
-            history.replace('/venue',{venue_key:this.state.currentVenueKey});
-          });
+
+            //Save to DynamoDB
+            fetch(appConfig.app.API_BASE_URL+'snaps',{
+                method: 'POST',
+                headers: {
+                          'Accept': 'application/json',
+                          'Content-Type': 'application/json',
+                          'Authorization': 'Bearer ' + userIdToken_temp
+                          },
+                body: JSON.stringify({
+                        image_url: signedUrlData.filename,
+                        venue: this.state.currentVenueKey
+                      })
+              })
+              .then(response => response.json())
+              .then((responseData) => { 
+                console.log(JSON.parse(responseData.body));
+                this.state.isLoading = false;
+                history.replace('/venue',{venue_key:this.state.currentVenueKey});
+
+              })
+              .catch((err) => { 
+                console.log(err);
+                this.displayErrorMessage("Updating to DB server failed. Please try again");
+              });
+          })
+        .catch((err) => { 
+              console.log(err);
+              this.displayErrorMessage("Storing image to Server failed. Please try again");
+        });        
       })
       .catch((err) => { 
-              console.log(err);
-            });
+        this.displayErrorMessage("Failed to upload image. Please try again");
+        console.log(err);
+      });
   }
+  displayErrorMessage(message)
+  {
+    this.setState({errorMessage: message});
+    this.setState({isLoading: false});
+  }
+
   componentWillUnmount() {
+    this.webcam = null;
     window.removeEventListener('resize', this.updateWindowDimensions);
   }
 
@@ -149,6 +174,7 @@ export default class CameraScreen extends React.Component {
   }
 
   capture = () => {
+    this.setState({isLoading:true});
     const imageSrc = this.webcam.getScreenshot();
     console.log('imageSrc');
     console.log(imageSrc);
@@ -158,6 +184,19 @@ export default class CameraScreen extends React.Component {
   render() {
     return (
       <div>
+      {
+        this.state.successMessage && this.state.successMessage.length?
+          <span>Success - { this.state.successMessage }</span>
+        :
+          <span></span>
+      }
+      {
+        this.state.errorMessage && this.state.errorMessage.length?
+          <span>Error - { this.state.errorMessage }</span>
+        :
+          <span></span>
+      }
+
         <Webcam
           audio={false}
           height={350}
@@ -165,7 +204,13 @@ export default class CameraScreen extends React.Component {
           screenshotFormat="image/jpeg"
           width={350}
         />
-        <button onClick={this.capture}>Capture photo</button>
+        {
+          this.state.isLoading?
+          <span>Updating your snap Please wait.</span>
+          :
+          <button onClick={this.capture}>Capture photo</button>
+        }
+        
       </div>
     );
   }

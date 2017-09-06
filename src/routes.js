@@ -1,19 +1,21 @@
 import React from 'react';
 import { Route, Router } from 'react-router-dom';
-import App from './App';
-import Home from './Home/Home';
 
-import Menu from './Screens/Menu'
-import Schedule from './Screens/Schedule'
-import MapContainer from './Screens/Map'
+import App from './App';
+import Auth from './Auth/Auth';
+import history from './history';
+// import Home from './Home/Home';
+
+/* Screens Start */
+import MenuScreen from './Screens/MenuScreen'
+import ScheduleScreen from './Screens/ScheduleScreen'
+import MapScreen from './Screens/MapScreen'
 import VenueScreen from './Screens/VenueScreen'
 import BadgesScreen from './Screens/BadgesScreen'
 import SnapScreen from './Screens/SnapScreen'
 import CameraScreen from './Screens/CameraScreen'
-
 import Callback from './Callback/Callback';
-import Auth from './Auth/Auth';
-import history from './history';
+/* Screens end */
 
 const API_BASE_URL = 'https://y86lpymaph.execute-api.us-east-2.amazonaws.com/prd/';
 
@@ -64,14 +66,14 @@ function checkOrCreateUser(id_token)
 }
 
 export const makeMainRoutes = () => {
+  //<Route path="/home" render={(props) => <Home auth={auth} {...props} />} />
   return (
       <Router history={history} component={App}>
         <div>
           <Route path="/" render={(props) => <App auth={auth} {...props} />} />
-          <Route path="/home" render={(props) => <Home auth={auth} {...props} />} />
-          <Route path="/menu" render={(props) => <Menu auth={auth} {...props} />} />
-          <Route path="/schedule" render={(props) => <Schedule auth={auth} {...props} />} />
-          <Route path="/map" render={(props) => <MapContainer auth={auth} {...props} />} />
+          <Route path="/menu" render={(props) => <MenuScreen auth={auth} {...props} />} />
+          <Route path="/schedule" render={(props) => <ScheduleScreen auth={auth} {...props} />} />
+          <Route path="/map" render={(props) => <MapScreen auth={auth} {...props} />} />
           <Route path="/venue" render={(props) => <VenueScreen auth={auth} {...props} />} />
           <Route path="/badges" render={(props) => <BadgesScreen auth={auth} {...props} />} />
           <Route path="/snaps" render={(props) => <SnapScreen auth={auth} {...props} />} />

@@ -2,6 +2,7 @@
   "name": "NKCGo",
   "version": "0.1.0",
   "private": true,
+  "description": "",
   "devDependencies": {
     "react-scripts": "0.9.5"
   },
@@ -26,5 +27,16 @@
     "build": "react-scripts build",
     "test": "react-scripts test --env=jsdom",
     "eject": "react-scripts eject"
-  }
+  },
+  "keywords": [],
+  "author": "",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Xeroeta/nkcgo-webapp.git"
+  },
+  "bugs": {
+    "url": "https://github.com/Xeroeta/nkcgo-webapp/issues"
+  },
+  "homepage": "https://github.com/Xeroeta/nkcgo-webapp"
 }

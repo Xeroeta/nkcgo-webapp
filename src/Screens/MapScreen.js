@@ -2,14 +2,14 @@ import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
 import {Map, InfoWindow, Marker, Polygon, GoogleApiWrapper} from 'google-maps-react';
 import history from '../history';
-
 import { poiClusters } from '../Config/sampleMapClusters';
-import { googlemaps, auth0 } from '../Config/params';
+import appConfig from '../Config/params';
 
-const map_key = googlemaps.key;
+const map_key = appConfig.googlemaps.key;
 const POIClustersData = poiClusters;
 const DEFAULT_PADDING = { top: 40, right: 40, bottom: 40, left: 40 };
-export class MapContainer extends React.Component {
+
+export class MapScreen extends React.Component {
 
   constructor(props) {
     super(props);
@@ -228,4 +228,4 @@ const style = {
 
 export default GoogleApiWrapper({
   apiKey: (map_key)
-})(MapContainer)
+})(MapScreen)

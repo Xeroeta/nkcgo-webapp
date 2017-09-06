@@ -1,5 +1,7 @@
 import React, { Component } from 'react';
-const UI_IMAGES_BASE_URL = 'https://s3.us-east-2.amazonaws.com/swiftmile-app-assets/';
+import appConfig from '../Config/params';
+
+// const UI_IMAGES_BASE_URL = 'https://s3.us-east-2.amazonaws.com/swiftmile-app-assets/';
 
 export default class SnapComponent extends Component {
 
@@ -33,7 +35,7 @@ export default class SnapComponent extends Component {
             >
               <img
                 alt=""
-                src={UI_IMAGES_BASE_URL + snap.image_url}
+                src={appConfig.app.USER_UPLOAD_IMAGES_BASE_URL + snap.image_url}
               />
               <p>{snap.venue}</p>
             </div>

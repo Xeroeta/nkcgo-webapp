@@ -2,9 +2,9 @@ import React, { Component } from 'react';
 import ReactSwipe from 'react-swipe';
 import { Button } from 'react-bootstrap';
 
-import history from './history';
+import history from '../history';
 
-export default class VenueInfoslider extends Component {
+export default class VenueSwiperComponent extends Component {
 
   constructor(props) {
     super(props);
@@ -52,6 +52,9 @@ export default class VenueInfoslider extends Component {
     
   }
 
+  login() {
+    this.props.auth.login();
+  }
   showMapDirections(e, venue_key)
   {
     alert("Redirect to Google Maps!");
@@ -95,6 +98,7 @@ export default class VenueInfoslider extends Component {
   }
 
   render() {
+    const { isAuthenticated } = this.props.auth;
     if(!this.state.VenuesData.length)
     {
       return (
@@ -103,7 +107,7 @@ export default class VenueInfoslider extends Component {
         </div>
       );
     }
-    
+
     return (
       <div className="slider-wrapper">
         <Button
@@ -140,13 +144,28 @@ export default class VenueInfoslider extends Component {
               <div>
                 <div>
                   <div>
-                    <Button
-                      bsStyle="primary"
-                      className="btn-margin"
-                      onClick={e => this.showCameraScreen(e, venue.venueID)}
-                    >
-                      CheckIn here
-                    </Button>
+                  {
+                    !isAuthenticated() && (
+                        <Button
+                          bsStyle="primary"
+                          className="btn-margin"
+                          onClick={this.login.bind(this)}
+                        >
+                          Login to CheckIn
+                        </Button>
+                      )
+                  }
+                  {
+                    isAuthenticated() && (
+                        <Button
+                          bsStyle="primary"
+                          className="btn-margin"
+                          onClick={e => this.showCameraScreen(e, venue.venueID)}
+                        >
+                          CheckIn here
+                        </Button>
+                      )
+                  }
                   </div>
                 </div>
                 <div>

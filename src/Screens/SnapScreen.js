@@ -1,7 +1,6 @@
 import React, { Component } from 'react';
-import SnapComponent from '../SnapComponent';
+import SnapComponent from '../Components/SnapComponent';
 import appConfig from '../Config/params';
-const API_BASE_URL = 'https://y86lpymaph.execute-api.us-east-2.amazonaws.com/prd/';
 
 export default class SnapScreen extends Component {
 
@@ -36,7 +35,7 @@ export default class SnapScreen extends Component {
       this.login();
     }
 
-    fetch(API_BASE_URL+'snaps', {
+    fetch(appConfig.app.API_BASE_URL+'snaps', {
       method: 'GET',
       headers: {
                 'Accept': 'application/json',

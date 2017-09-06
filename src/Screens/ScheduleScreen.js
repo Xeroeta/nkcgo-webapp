@@ -1,11 +1,12 @@
 import React, { Component } from 'react';
-// import ReactDOM from 'react-dom';
+import appConfig from '../Config/params';
+
 const style = {
   width: '100%',
   height: '100%',
   margin: '0px'
 }
-export default class Schedule extends Component {
+export default class ScheduleScreen extends Component {
 
   constructor(props) {
     super(props);
@@ -15,7 +16,7 @@ export default class Schedule extends Component {
 
   componentWillMount() {
 
-    }
+  }
 
   componentDidMount() {
     this.updateWindowDimensions();
@@ -33,7 +34,7 @@ export default class Schedule extends Component {
   render() {
     return (
       <div>
-        <img alt="" style={style} src="https://s3.us-east-2.amazonaws.com/swiftmile-app-assets/ui-images/Schedule.png" />
+        <img alt="NKCGo Schedule" style={style} src={appConfig.app.UI_IMAGES_BASE_URL + "Schedule.png"} />
       </div>
 
       );

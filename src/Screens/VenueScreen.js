@@ -1,32 +1,7 @@
 import React, { Component } from 'react';
-// import ReactDOM from 'react-dom';
-import VenueInfoslider from '../VenueInfoslider';
-// import { poiClusters } from '../Config/sampleMapClusters';
-// const POIClustersData = poiClusters;
-// const VenuesData = parseMarkers();
+import VenueSwiperComponent from '../Components/VenueSwiperComponent';
+import appConfig from '../Config/params';
 
-// const UI_IMAGES_BASE_URL = 'https://s3.us-east-2.amazonaws.com/swiftmile-app-assets/ui-images/';
-const API_BASE_URL = 'https://y86lpymaph.execute-api.us-east-2.amazonaws.com/prd/';
-
-  // function parseMarkers(inputMarkers)
-  // {
-  //   let markers = [];
-  //   for (var i = POIClustersData.length - 1; i >= 0; i--) {
-  //     for (var j = POIClustersData[i].pois.length - 1; j >= 0; j--) {
-  //       markers.push(POIClustersData[i].pois[j]);
-  //     }
-  //   }
-  //   return markers;
-  // }
-  // function val2key(val, markers_array){
-  //   for (var key in markers_array) {
-  //     let array_val = markers_array[key];
-  //     if(array_val.venueId == val){
-  //         return key;
-  //         break;
-  //     }
-  //   }
-  // }
 export default class VenueScreen extends Component {
 
   constructor(props) {
@@ -57,7 +32,7 @@ export default class VenueScreen extends Component {
   // }
 
   componentDidMount() {
-    fetch(API_BASE_URL+'venues')
+    fetch(appConfig.app.API_BASE_URL+'venues')
       .then(response => response.json())
       .then((responseData) => { 
         console.log(JSON.parse(responseData.body));
@@ -69,7 +44,7 @@ export default class VenueScreen extends Component {
   render() {
 
     return (
-        <VenueInfoslider  currentVenueKey={ this.state.currentVenueKey } VenuesData={ this.state.VenuesData } />
+        <VenueSwiperComponent auth={this.props.auth}  currentVenueKey={ this.state.currentVenueKey } VenuesData={ this.state.VenuesData } />
     );
   }
 }

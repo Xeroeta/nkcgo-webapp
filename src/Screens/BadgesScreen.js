@@ -1,9 +1,7 @@
 import React, { Component } from 'react';
 // import ReactDOM from 'react-dom';
-import BadgeComponent from '../BadgeComponent';
-
-// const UI_IMAGES_BASE_URL = 'https://s3.us-east-2.amazonaws.com/swiftmile-app-assets/ui-images/';
-const API_BASE_URL = 'https://y86lpymaph.execute-api.us-east-2.amazonaws.com/prd/';
+import BadgeComponent from '../Components/BadgeComponent';
+import appConfig from '../Config/params';
 
 export default class BadgesScreen extends Component {
 
@@ -32,7 +30,7 @@ export default class BadgesScreen extends Component {
       this.login();
     }
 
-    fetch(API_BASE_URL+'badges', {
+    fetch(appConfig.app.API_BASE_URL+'badges', {
       method: 'GET',
       headers: {
                 'Accept': 'application/json',

@@ -1,19 +1,18 @@
 import React, { Component } from 'react';
 import { Button } from 'react-bootstrap';
+import appConfig from '../Config/params';
 
 const deviceWidth = window.innerWidth;
 const deviceHeight = window.innerHeight;
 
-const UI_IMAGES_BASE_URL = 'https://s3.us-east-2.amazonaws.com/swiftmile-app-assets/ui-images/';
-class Menu extends Component {
+class MenuScreen extends Component {
   goTo(route) {
     // alert(route);
     this.props.history.replace(`/${route}`)
   }
 
   componentWillMount() {
-    // console.log('Menu Page Id token');
-    // console.log(this.props.auth.getIdToken());
+    
   }
   
   render() {
@@ -26,13 +25,13 @@ class Menu extends Component {
             <img
               style={ styles.logo }
 
-              src={UI_IMAGES_BASE_URL + "AppLoadingSplashPage-SwiftMile.png"}
+              src={appConfig.app.UI_IMAGES_BASE_URL + "AppLoadingSplashPage-SwiftMile.png"}
             />
 
             <img
               style={ styles.logo }
 
-              src={UI_IMAGES_BASE_URL + "AppLoadingSplashPagePintPathLogo.png"}
+              src={appConfig.app.UI_IMAGES_BASE_URL + "AppLoadingSplashPagePintPathLogo.png"}
             />
           </div>
           <div className="row" >
@@ -42,7 +41,7 @@ class Menu extends Component {
               >
               <img
                 style={ styles.btn }
-                src={UI_IMAGES_BASE_URL+"MainMenu-ScheduleButton.png"}
+                src={appConfig.app.UI_IMAGES_BASE_URL+"MainMenu-ScheduleButton.png"}
               />
             </a>
           </div>
@@ -53,7 +52,7 @@ class Menu extends Component {
               >
               <img
                 style={ styles.btn }
-                src={UI_IMAGES_BASE_URL+"MainMenu-MapButton.png"}
+                src={appConfig.app.UI_IMAGES_BASE_URL+"MainMenu-MapButton.png"}
               />
             </a>
           </div>
@@ -64,7 +63,7 @@ class Menu extends Component {
               >
               <img
                 style={ styles.btn }
-                src={UI_IMAGES_BASE_URL+"MainMenu-VenueButton.png"}
+                src={appConfig.app.UI_IMAGES_BASE_URL+"MainMenu-VenueButton.png"}
               />
             </a>
           </div>
@@ -75,7 +74,7 @@ class Menu extends Component {
               >
               <img
                 style={ styles.btn }
-                src={UI_IMAGES_BASE_URL+"MainMenu-BadgesButton.png"}
+                src={appConfig.app.UI_IMAGES_BASE_URL+"MainMenu-BadgesButton.png"}
               />
             </a>
           </div>
@@ -86,7 +85,7 @@ class Menu extends Component {
               >
               <img
                 style={ styles.btn }
-                src={UI_IMAGES_BASE_URL+"MainMenu-MySnapsRepositoryButton.png"}
+                src={appConfig.app.UI_IMAGES_BASE_URL+"MainMenu-MySnapsRepositoryButton.png"}
               />
             </a>
           </div>
@@ -139,4 +138,4 @@ const styles = {
   }
 };
 
-export default Menu;
+export default MenuScreen;
