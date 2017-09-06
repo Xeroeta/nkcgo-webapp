@@ -60,9 +60,9 @@ export default class VenueSwiperComponent extends Component {
     alert("Redirect to Google Maps!");
   }
 
-  showCameraScreen(e, venue_key)
+  showCameraScreen(e, venue_key, venue_title)
   {
-    history.replace('/camera',{venue_key:venue_key});
+    history.replace('/camera',{venue_key:venue_key, venue_title: venue_title});
   }
 
   goTo(route) {
@@ -160,7 +160,7 @@ export default class VenueSwiperComponent extends Component {
                         <Button
                           bsStyle="primary"
                           className="btn-margin"
-                          onClick={e => this.showCameraScreen(e, venue.venueID)}
+                          onClick={e => this.showCameraScreen(e, venue.venueID, venue.title)}
                         >
                           CheckIn here
                         </Button>

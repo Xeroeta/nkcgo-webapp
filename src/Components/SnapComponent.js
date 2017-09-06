@@ -40,6 +40,26 @@ export default class SnapComponent extends Component {
                 src={appConfig.app.USER_UPLOAD_IMAGES_BASE_URL + snap.image_url}
               />
               <p>{snap.venue}</p>
+              {
+                snap.venue_title ?
+                  <p>Venue: {snap.venue_title}</p>
+                :
+                  <p></p>  
+              }
+              
+              {
+                snap.reviewed ?
+                  <p>Reviewed: Yes</p>
+                :
+                  <p>Reviewed: No</p>
+              }
+              {
+                snap.createdAt ?
+                  <p>Snap created at - {snap.createdAt}</p>
+                :
+                  <p></p>
+              }
+              
             </div>
           ))
       }

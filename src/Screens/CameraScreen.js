@@ -11,6 +11,7 @@ export default class CameraScreen extends React.Component {
     this.state = { width: '0', height: '0' };
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
     this.state.currentVenueKey = null;
+    this.state.currentVenueTitle = '';
     this.state.isLoading = false;
     this.state.errorMessage = '';
     this.state.successMessage = '';
@@ -22,6 +23,14 @@ export default class CameraScreen extends React.Component {
       this.state = {
         currentVenueKey: venue_param.venue_key
       };
+    }
+    if(venue_param!==undefined && venue_param.venue_title!==undefined)
+    {
+      const currentVenueTitle = venue_param.venue_title;
+      this.state = {
+        currentVenueTitle: venue_param.venue_title
+      };
+      
     }
   }
 
@@ -134,7 +143,8 @@ export default class CameraScreen extends React.Component {
                           },
                 body: JSON.stringify({
                         image_url: signedUrlData.filename,
-                        venue: this.state.currentVenueKey
+                        venue: this.state.currentVenueKey,
+                        venue_title: this.state.currentVenueTitle
                       })
               })
               .then(response => response.json())
