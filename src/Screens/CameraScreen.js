@@ -104,7 +104,7 @@ export default class CameraScreen extends React.Component {
                 }
     })
       .then(response => response.json())
-      .then((responseData) => { 
+      .then((responseData) => {
         console.log(JSON.parse(responseData.body));
         return JSON.parse(responseData.body);
       })
@@ -117,7 +117,7 @@ export default class CameraScreen extends React.Component {
         console.log(bb_imageSrc);
 
         axios.put(signedUrlData.url, bb_imageSrc, {
-          'ContentEncoding': 'base64', 
+          'ContentEncoding': 'base64',
           'Content-Type':'image/jpeg'
         })
         // .then(response => response.json())
@@ -138,23 +138,23 @@ export default class CameraScreen extends React.Component {
                       })
               })
               .then(response => response.json())
-              .then((responseData) => { 
+              .then((responseData) => {
                 console.log(JSON.parse(responseData.body));
                 this.state.isLoading = false;
                 history.replace('/venue',{venue_key:this.state.currentVenueKey});
 
               })
-              .catch((err) => { 
+              .catch((err) => {
                 console.log(err);
                 this.displayErrorMessage("Updating to DB server failed. Please try again");
               });
           })
-        .catch((err) => { 
+        .catch((err) => {
               console.log(err);
               this.displayErrorMessage("Storing image to Server failed. Please try again");
-        });        
+        });
       })
-      .catch((err) => { 
+      .catch((err) => {
         this.displayErrorMessage("Failed to upload image. Please try again");
         console.log(err);
       });
@@ -185,7 +185,7 @@ export default class CameraScreen extends React.Component {
     console.log(imageSrc);
     this.uploadImage(imageSrc);
   };
-  
+
   render() {
     return (
       <div>
@@ -201,7 +201,7 @@ export default class CameraScreen extends React.Component {
         :
           <span></span>
       }
-
+        <center>
         <Webcam
           audio={false}
           height={350}
@@ -209,13 +209,15 @@ export default class CameraScreen extends React.Component {
           screenshotFormat="image/jpeg"
           width={350}
         />
+        </center>
+
         {
           this.state.isLoading?
           <span>Updating your snap Please wait.</span>
           :
-          <button onClick={this.capture}>Capture photo</button>
+          <center><button onClick={this.capture}>Capture photo</button></center>
         }
-        
+
       </div>
     );
   }

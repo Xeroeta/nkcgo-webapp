@@ -4,6 +4,8 @@ import { Button } from 'react-bootstrap';
 
 import history from '../history';
 
+const GOOGLE_DIR_PREFIX = 'https://www.google.com/maps/dir/?api=1&dir_action=navigate&travelmode=walking&destination=';
+
 export default class VenueSwiperComponent extends Component {
 
   constructor(props) {
@@ -27,7 +29,7 @@ export default class VenueSwiperComponent extends Component {
       // console.log("Val = ");
       // console.log(val);
       // console.log("Venue id - ");
-      // console.log(array_val.venueID);      
+      // console.log(array_val.venueID);
       if(array_val.venueID === val){
           console.log("Returning final key - ");
           console.log(key);
@@ -49,15 +51,16 @@ export default class VenueSwiperComponent extends Component {
     console.log(currentVenueSliderIndex);
     this.setState({ startSlide: currentVenueSliderIndex });
     this.setState({ VenuesData: nextProps.VenuesData });
-    
+
   }
 
   login() {
     this.props.auth.login();
   }
-  showMapDirections(e, venue_key)
+  showMapDirections(e, venue_key, venue_description)
   {
-    alert("Redirect to Google Maps!");
+    //alert("Redirect to Google Maps!");
+    window.location.href = GOOGLE_DIR_PREFIX+venue_description;
   }
 
   showCameraScreen(e, venue_key)
@@ -115,85 +118,102 @@ export default class VenueSwiperComponent extends Component {
           className="btn-margin"
           onClick={this.goToPreviousSlide.bind(this)}
         >
-          Previous
+          {'<<'} Previous
         </Button>
-        <ReactSwipe 
+
+        <ReactSwipe
           key={this.state.VenuesData.length}
           ref={ref => { this.swiper = ref; }}
           swipeOptions={{continuous: true, startSlide: this.state.startSlide}}
         >
         {
           this.state.VenuesData.map(venue => (
-            <div 
+            <div
               className="slide-wrapper"
               key={venue.venueID}
             >
-              <div>
-                <p >{venue.title}</p>
-                <p >{venue.description}</p>
-                <img
-                  alt=""
-                  style={{
-                    height:200,
-                    width:200
-                  }}
-                  src={venue.markerImage}
-                  />
-              </div>
+              <center>
+                <div>
+                  <p style={styles.venueTitle}>{venue.title}</p>
+                  <p >{venue.description}</p>
+                  <img
+                    alt=""
+                    style={{
+                      height:200,
+                      width:200
+                    }}
+                    src={venue.markerImage}
+                    />
+                </div>
 
-              <div>
                 <div>
                   <div>
-                  {
-                    !isAuthenticated() && (
-                        <Button
-                          bsStyle="primary"
-                          className="btn-margin"
-                          onClick={this.login.bind(this)}
-                        >
-                          Login to CheckIn
-                        </Button>
-                      )
-                  }
-                  {
-                    isAuthenticated() && (
-                        <Button
-                          bsStyle="primary"
-                          className="btn-margin"
-                          onClick={e => this.showCameraScreen(e, venue.venueID)}
-                        >
-                          CheckIn here
-                        </Button>
-                      )
-                  }
+                    <div>
+                    {
+                      !isAuthenticated() && (
+                          <Button
+                            bsStyle="primary"
+                            className="btn-margin"
+                            onClick={this.login.bind(this)}
+                          >
+                            Login to CheckIn
+                          </Button>
+                        )
+                    }
+                    {
+                      isAuthenticated() && (
+                          <Button
+                            bsStyle="primary"
+                            className="btn-margin"
+                            onClick={e => this.showCameraScreen(e, venue.venueID)}
+                          >
+                            CheckIn here
+                          </Button>
+                        )
+                    }
+                    </div>
                   </div>
-                </div>
-                <div>
                   <div>
-                    <Button
-                      bsStyle="primary"
-                      className="btn-margin"
-                      onClick={e => this.showMapDirections(e, venue.venueID)}
-                    >
-                      Get directions to this venue
-                    </Button>
+                    <div>
+                      <Button
+                        bsStyle="primary"
+                        className="btn-margin"
+                        onClick={e => this.showMapDirections(e, venue.venueID, venue.description)}
+                        //onClick={url:GOOGLE_DIR_PREFIX+venue.description}
+                      >
+                        Get directions to this venue
+                      </Button>
+                    </div>
                   </div>
                 </div>
-              </div>
-            
+              </center>
             </div>
           ))
         }
         </ReactSwipe>
+
         <Button
           bsStyle="primary"
           className="btn-margin"
           onClick={this.goToNextSlide.bind(this)}
         >
-          Next
+          Next {'>>'}
         </Button>
-        
+
       </div>
     );
   }
 }
+
+const styles = {
+  venueTitle: {
+    color: '#0cf',
+    fontSize: 30,
+    fontWeight: 'bold',
+  },
+  venueDescription: {
+    color: '#0cf',
+    fontSize: 24,
+    fontWeight: 'normal',
+  }
+};
