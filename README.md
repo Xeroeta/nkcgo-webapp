@@ -24,10 +24,17 @@ yarn  start
 
 The application will be served at `http://localhost:3000`.
 
+## Build the Application
+
+```bash
+yarn  build
+
+```
+
 
 ## Author
 
-[NKCGo](nkcgo.com)
+[NKCGo](http://nkcgo.com)
 
 ## License
 

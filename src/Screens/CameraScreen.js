@@ -1,7 +1,7 @@
 import React from 'react';
 import axios from 'axios';
 import Webcam from 'react-webcam';
-import history from './history';
+import history from '../history';
 const API_BASE_URL = 'https://y86lpymaph.execute-api.us-east-2.amazonaws.com/prd/';
 
 //goBack()
@@ -129,7 +129,7 @@ export default class CameraScreen extends React.Component {
             console.log(JSON.parse(responseData.body));
             // return JSON.parse(responseData.body);
             // this.props.history.goBack();
-            history.replace('/venue',{venue_key:venue_key});
+            history.replace('/venue',{venue_key:this.state.currentVenueKey});
           });
       })
       .catch((err) => { 
