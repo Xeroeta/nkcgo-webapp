@@ -15,78 +15,82 @@ class Menu extends Component {
     // console.log('Menu Page Id token');
     // console.log(this.props.auth.getIdToken());
   }
-  
+
   render() {
     return (
       <div style={styles.container} >
-        <div
-          style={ styles.logoContainer }
-        >
-          <img
-            style={ styles.logo }
-            src={UI_IMAGES_BASE_URL + "AppLoadingSplashPage-SwiftMile.png"}
-          />
+        <center>
+          <div
+            style={ styles.logoContainer }
+          >
+            <img
+              style={ styles.logo }
 
-          <img
-            style={ styles.logo }
-            src={UI_IMAGES_BASE_URL + "AppLoadingSplashPagePintPathLogo.png"}
-          />
-        </div>
-        <div className="row" >
-          <a
-            style={ styles.btn }
-            onClick={this.goTo.bind(this, 'schedule')}
-            >
-            <img
-              style={ styles.btn }
-              src={UI_IMAGES_BASE_URL+"MainMenu-ScheduleButton.png"}
+              src={UI_IMAGES_BASE_URL + "AppLoadingSplashPage-SwiftMile.png"}
             />
-          </a>        
-        </div>
-        <div className="row" >
-          <a
-            onClick={this.goTo.bind(this, 'map')}
-            style={ styles.btn }
-            >
+
             <img
-              style={ styles.btn }
-              src={UI_IMAGES_BASE_URL+"MainMenu-MapButton.png"}
+              style={ styles.logo }
+
+              src={UI_IMAGES_BASE_URL + "AppLoadingSplashPagePintPathLogo.png"}
             />
-          </a>
-        </div>
-        <div className="row" >
-          <a
-            onClick={this.goTo.bind(this, 'venue')}
-            style={ styles.btn }
-            >
-            <img
+          </div>
+          <div className="row" >
+            <a
               style={ styles.btn }
-              src={UI_IMAGES_BASE_URL+"MainMenu-VenueButton.png"}
-            />
-          </a>
-        </div>
-        <div className="row" >
-          <a
-            onClick={this.goTo.bind(this, 'badges')}
-            style={ styles.btn }
-            >
-            <img
+              onClick={this.goTo.bind(this, 'schedule')}
+              >
+              <img
+                style={ styles.btn }
+                src={UI_IMAGES_BASE_URL+"MainMenu-ScheduleButton.png"}
+              />
+            </a>
+          </div>
+          <div className="row" >
+            <a
+              onClick={this.goTo.bind(this, 'map')}
               style={ styles.btn }
-              src={UI_IMAGES_BASE_URL+"MainMenu-BadgesButton.png"}
-            />
-          </a>
-        </div>
-        <div className="row" >
-          <a
-            style={ styles.btn }
-            onClick={this.goTo.bind(this, 'snaps')}
-            >
-            <img
+              >
+              <img
+                style={ styles.btn }
+                src={UI_IMAGES_BASE_URL+"MainMenu-MapButton.png"}
+              />
+            </a>
+          </div>
+          <div className="row" >
+            <a
+              onClick={this.goTo.bind(this, 'venue')}
               style={ styles.btn }
-              src={UI_IMAGES_BASE_URL+"MainMenu-MySnapsRepositoryButton.png"}
-            />
-          </a>
-        </div>
+              >
+              <img
+                style={ styles.btn }
+                src={UI_IMAGES_BASE_URL+"MainMenu-VenueButton.png"}
+              />
+            </a>
+          </div>
+          <div className="row" >
+            <a
+              onClick={this.goTo.bind(this, 'badges')}
+              style={ styles.btn }
+              >
+              <img
+                style={ styles.btn }
+                src={UI_IMAGES_BASE_URL+"MainMenu-BadgesButton.png"}
+              />
+            </a>
+          </div>
+          <div className="row" >
+            <a
+              style={ styles.btn }
+              onClick={this.goTo.bind(this, 'snaps')}
+              >
+              <img
+                style={ styles.btn }
+                src={UI_IMAGES_BASE_URL+"MainMenu-MySnapsRepositoryButton.png"}
+              />
+            </a>
+          </div>
+        </center>
       </div>
 
     );
@@ -97,7 +101,8 @@ const styles = {
   container: {
     flex: 1,
     flexDirection: 'row',
-    flexWrap: 'wrap'
+    flexWrap: 'wrap',
+    maxWidth: 736
   },
   image: {
     width: deviceWidth,
@@ -115,7 +120,8 @@ const styles = {
     borderRadius: 5,
     borderWidth: 1,
     borderColor: '#007aff',
-    backgroundColor: '#fff'
+    backgroundColor: '#fff',
+    resizeMode: 'contain'
     //flex: 1,
     //alignSelf: 'stretch',
   },
@@ -126,8 +132,8 @@ const styles = {
     marginBottom: 40
   },
   logo: {
-    width: 100,
-    height: 100,
+    width: 125,
+    height: 125,
     paddingTop: 10,
     padding: 10,
     resizeMode: 'contain',
