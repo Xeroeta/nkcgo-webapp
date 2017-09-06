@@ -111,13 +111,18 @@ export default class CameraScreen extends React.Component {
       .then((signedUrlData) => {
         //Upload to S3 and save data in DB
         let bb_imageSrc =  this.dataURItoBlob(imageSrc);
+        console.log("URL");
+        console.log(signedUrlData.url);
+        console.log("ImageData");
+        console.log(bb_imageSrc);
+
         axios.put(signedUrlData.url, bb_imageSrc, {
           'ContentEncoding': 'base64', 
           'Content-Type':'image/jpeg'
         })
-        .then(response => response.json())
+        // .then(response => response.json())
         .then((responseData) => {
-            console.log(JSON.parse(responseData.body));
+            console.log(responseData);
 
             //Save to DynamoDB
             fetch(appConfig.app.API_BASE_URL+'snaps',{
