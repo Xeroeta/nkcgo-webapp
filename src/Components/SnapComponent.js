@@ -8,7 +8,8 @@ export default class SnapComponent extends Component {
   constructor(props) {
     super(props);
     this.state = {
-      snaps: props.snaps
+      snaps: props.snaps,
+      snapsLoaded: props.snapsLoaded
     };
     console.log('initial Props');
     console.log(props.snaps);
@@ -16,7 +17,8 @@ export default class SnapComponent extends Component {
   componentWillReceiveProps(nextProps) {
     console.log('nextProps.snaps');
     console.log(nextProps.snaps);
-    this.setState({ snaps: nextProps.snaps });  
+    this.setState({ snaps: nextProps.snaps });
+    this.setState({ snapsLoaded: nextProps.snapsLoaded });
   }
 
   goTo(route) {

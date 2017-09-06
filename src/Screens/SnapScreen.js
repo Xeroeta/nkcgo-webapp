@@ -8,9 +8,12 @@ export default class SnapScreen extends Component {
     super(props);
 
     this.state = {
-      SnapsData: []
+      SnapsData: [],
+      snapsLoaded: false,
+      errorMessage:""
     };
   }
+
   login() {
     this.props.auth.login();
   }
@@ -47,16 +50,41 @@ export default class SnapScreen extends Component {
       .then((responseData) => { 
         console.log(JSON.parse(responseData.body));
         //JSON.parse(responseData.body)
+        
+        this.setState({ snapsLoaded: true }); 
         this.setState({ SnapsData: JSON.parse(responseData.body) }); 
       })
-      // .catch(err => (err){ console.log(err); });
+      .catch((err) => { 
+        this.displayErrorMessage("Failed to load yous snaps from server. Please try again");
+        console.log(err);
+      });
       ;
   }
-
+  displayErrorMessage(message)
+  {
+    this.setState({errorMessage: message});
+    this.setState({snapsLoaded: true});
+  }
   render() {
 
     return (
-        <SnapComponent  snaps={ this.state.SnapsData } />
+      <span>
+        {
+          this.state.errorMessage && this.state.errorMessage.length?
+            <span>Error - { this.state.errorMessage }</span>
+          :
+            <span></span>
+        }
+        {
+          !this.state.snapsLoaded ?
+            <span>Loading your snaps please wait</span>
+          :
+            this.state.SnapsData.length?
+            <SnapComponent snapsLoaded={this.state.snapsLoaded} snaps={ this.state.SnapsData } />
+            :
+            <span>You have not uploaded any snaps</span>
+        }
+        </span>
     );
   }
 }
