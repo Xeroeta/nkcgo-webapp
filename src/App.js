@@ -59,7 +59,7 @@ class App extends Component {
     }
     return (
       <div>
-        <Navbar fluid style={styles.navbar}>
+        <Navbar staticTop inverse style={styles.navbar} fluid>
           <Navbar.Header>
             <Navbar.Brand>
               <a>{this.state.currentScreenTitle}</a>
@@ -86,7 +86,8 @@ class App extends Component {
             {
               !isAuthenticated() && (
                   <Button
-                    bsStyle="primary"
+                    bsStyle="default"
+                    bsSize="small"
                     className="btn-margin"
                     onClick={this.login.bind(this)}
                   >
@@ -97,7 +98,8 @@ class App extends Component {
             {
               isAuthenticated() && (
                   <Button
-                    bsStyle="primary"
+                    bsStyle="default"
+                    bsSize="small"
                     className="btn-margin"
                     onClick={this.logout.bind(this)}
                   >
@@ -118,13 +120,13 @@ const styles = {
     width: 75,
     height: 50,
     //paddingTop: 30,
-    marginBottom: 5,
-    marginLeft: 5,
-    marginRight: 5,
-    borderRadius: 5,
-    borderWidth: 1,
-    borderColor: '#007aff',
-    backgroundColor: '#fff',
+    marginBottom: 0,
+    marginLeft: 0,
+    marginRight: 0,
+    borderRadius: 0,
+    borderWidth: 0,
+    borderColor: '#000',
+    backgroundColor: '#000',
     resizeMode: 'contain',
     justifyContent: 'center',
     alignItems: 'center'
@@ -133,8 +135,9 @@ const styles = {
   },
   navbar: {
     marginBottom: "0",
-    backgroundColor: '#fff'
-   }
+    padding: "0",
+    backgroundColor: '#000'
+  }
 };
 
 export default App;
