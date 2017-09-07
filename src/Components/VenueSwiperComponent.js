@@ -29,7 +29,7 @@ export default class VenueSwiperComponent extends Component {
       // console.log("Val = ");
       // console.log(val);
       // console.log("Venue id - ");
-      // console.log(array_val.venueID);      
+      // console.log(array_val.venueID);
       if(array_val.venueID === val){
           console.log("Returning final key - ");
           console.log(key);
@@ -51,7 +51,7 @@ export default class VenueSwiperComponent extends Component {
     console.log(currentVenueSliderIndex);
     this.setState({ startSlide: currentVenueSliderIndex });
     this.setState({ VenuesData: nextProps.VenuesData });
-    
+
   }
 
   login() {
@@ -136,21 +136,21 @@ export default class VenueSwiperComponent extends Component {
         >
           {'<<'} Previous
         </Button>
-        <ReactSwipe 
+        <ReactSwipe
           key={this.state.VenuesData.length}
           ref={ref => { this.swiper = ref; }}
           swipeOptions={{continuous: true, startSlide: this.state.startSlide}}
         >
         {
           this.state.VenuesData.map(venue => (
-            <div 
+            <div
               className="slide-wrapper"
               key={venue.venueID}
             >
             <center>
               <div>
-                <p >{venue.title}</p>
-                <p >{venue.description}</p>
+                <p style={styles.venueTitle}>{venue.title}</p>
+                <p style={styles.venueDescription}>{venue.description}</p>
                 <img
                   alt=""
                   style={{
@@ -171,7 +171,7 @@ export default class VenueSwiperComponent extends Component {
                           className="btn-margin"
                           onClick={this.login.bind(this)}
                         >
-                          Login to CheckIn
+                          Login to Check-In
                         </Button>
                       )
                   }
@@ -182,16 +182,16 @@ export default class VenueSwiperComponent extends Component {
                           className="btn-margin"
                           onClick={e => this.showCameraScreen(e, venue.venueID, venue.title)}
                         >
-                          CheckIn here
+                          Check-In here
                         </Button>
-                      ) && 
+                      ) &&
                       (
                       <Button
                           bsStyle="primary"
                           className="btn-margin"
                           onClick={e => this.showSnapUploadScreen(e, venue.venueID, venue.title)}
                         >
-                          CheckIn here - via image upload
+                          Check-In Here (Photo Upload or Snaps)
                         </Button>
                       )
                   }
@@ -221,7 +221,7 @@ export default class VenueSwiperComponent extends Component {
         >
           Next {'>>'}
         </Button>
-        
+
       </div>
     );
   }
@@ -229,13 +229,13 @@ export default class VenueSwiperComponent extends Component {
 
 const styles = {
   venueTitle: {
-    color: '#0cf',
+    color: '#03c',
     fontSize: 30,
     fontWeight: 'bold',
   },
   venueDescription: {
-    color: '#0cf',
-    fontSize: 24,
+    color: '#09c',
+    fontSize: 20,
     fontWeight: 'normal',
   }
 };
