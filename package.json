@@ -15,8 +15,11 @@
     "react": "^15.5.4",
     "react-bootstrap": "^0.31.0",
     "react-dom": "^15.5.4",
+    "react-dropzone": "^4.1.2",
+    "react-dropzone-s3-uploader": "^1.1.0",
     "react-router": "^4.1.1",
     "react-router-dom": "^4.1.1",
+    "react-share": "^1.16.0",
     "react-slick": "^0.15.4",
     "react-swipe": "^5.0.8",
     "react-webcam": "^0.2.0",
@@ -38,5 +41,5 @@
   "bugs": {
     "url": "https://github.com/Xeroeta/nkcgo-webapp/issues"
   },
-  "homepage": "https://github.com/Xeroeta/nkcgo-webapp"
+  "homepage": "https://nkcgo.com/"
 }

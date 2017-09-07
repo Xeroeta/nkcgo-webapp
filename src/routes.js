@@ -14,6 +14,7 @@ import VenueScreen from './Screens/VenueScreen'
 import BadgesScreen from './Screens/BadgesScreen'
 import SnapScreen from './Screens/SnapScreen'
 import CameraScreen from './Screens/CameraScreen'
+import UploadSnapScreen from './Screens/UploadSnapScreen'
 import Callback from './Callback/Callback';
 /* Screens end */
 
@@ -78,6 +79,7 @@ export const makeMainRoutes = () => {
           <Route path="/badges" render={(props) => <BadgesScreen auth={auth} {...props} />} />
           <Route path="/snaps" render={(props) => <SnapScreen auth={auth} {...props} />} />
           <Route path="/camera" render={(props) => <CameraScreen auth={auth} {...props} />} />
+          <Route path="/upload" render={(props) => <UploadSnapScreen auth={auth} {...props} />} />
 
           <Route path="/callback" render={(props) => {
             handleAuthentication(props);

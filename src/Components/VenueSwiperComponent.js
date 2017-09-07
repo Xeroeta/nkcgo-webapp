@@ -74,6 +74,16 @@ export default class VenueSwiperComponent extends Component {
     history.replace('/camera',{venue_key:venue_key, venue_title: venue_title});
   }
 
+  showSnapUploadScreen(e, venue_key, venue_title)
+  {
+    console.log("inside - showCameraScreen Venue_key");
+    console.log(venue_key);
+    console.log("inside - showCameraScreen venue_title");
+    console.log(venue_title);
+    history.replace('/upload',{venue_key:venue_key, venue_title: venue_title});
+
+  }
+
   goTo(route) {
     // alert(route);
     this.props.history.replace(`/${route}`)
@@ -173,6 +183,15 @@ export default class VenueSwiperComponent extends Component {
                           onClick={e => this.showCameraScreen(e, venue.venueID, venue.title)}
                         >
                           CheckIn here
+                        </Button>
+                      ) && 
+                      (
+                      <Button
+                          bsStyle="primary"
+                          className="btn-margin"
+                          onClick={e => this.showSnapUploadScreen(e, venue.venueID, venue.title)}
+                        >
+                          CheckIn here - via image upload
                         </Button>
                       )
                   }
