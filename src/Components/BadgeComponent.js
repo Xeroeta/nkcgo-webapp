@@ -58,7 +58,7 @@ export default class BadgeComponent extends Component {
   componentWillReceiveProps(nextProps) {
     console.log('nextProps.VenuesData');
     console.log(nextProps.badges);
-    this.setState({ badges: nextProps.badges });  
+    this.setState({ badges: nextProps.badges });
   }
 
   goTo(route) {
@@ -83,67 +83,38 @@ export default class BadgeComponent extends Component {
                 />
                 <p style={styles.badgeTitle}>{mybadge.badgeName}{'\n\n'}</p>
               </center>
-              
+
 
               <div className="Nkcgo_social-network">
-                <FacebookShareButton
-                  url={shareUrl}
-                  quote={title}
-                  className="Nkcgo_social-network__share-button">
-                  <FacebookIcon
-                    size={32}
-                    round />
-                </FacebookShareButton>
+                <center>
+                  <FacebookShareButton
+                    url={shareUrl}
+                    quote={title}
+                    className="Nkcgo_social-network__share-button">
+                    <FacebookIcon
+                      size={32}
+                      round />
+                  </FacebookShareButton>
 
-                <FacebookShareCount
-                  url={shareUrl}
-                  className="Nkcgo_social-network__share-count">
-                  {count => count}
-                </FacebookShareCount>
-              </div>
-              <div className="Nkcgo_social-network">
-                <TwitterShareButton
-                  url={shareUrl}
-                  title={title}
-                  className="Nkcgo_social-network__share-button">
-                  <TwitterIcon
-                    size={32}
-                    round />
-                </TwitterShareButton>
+                  <FacebookShareCount
+                    url={shareUrl}
+                    className="Nkcgo_social-network__share-count">
+                    {count => count}
+                  </FacebookShareCount>
 
-                <div className="Nkcgo_social-network__share-count">
-                  &nbsp;
-                </div>
-              </div>
+                  <TwitterShareButton
+                    url={shareUrl}
+                    title={title}
+                    className="Nkcgo_social-network__share-button">
+                    <TwitterIcon
+                      size={32}
+                      round />
+                  </TwitterShareButton>
 
-              <div className="Nkcgo_social-network">
-                <WhatsappShareButton
-                  url={shareUrl}
-                  title={title}
-                  separator=":: "
-                  className="Nkcgo_social-network__share-button">
-                  <WhatsappIcon size={32} round />
-                </WhatsappShareButton>
-
-                <div className="Nkcgo_social-network__share-count">
-                  &nbsp;
-                </div>
-              </div>
-
-              <div className="Nkcgo_social-network">
-                <GooglePlusShareButton
-                  url={shareUrl}
-                  className="Nkcgo_social-network__share-button">
-                  <GooglePlusIcon
-                    size={32}
-                    round />
-                </GooglePlusShareButton>
-
-                <GooglePlusShareCount
-                  url={shareUrl}
-                  className="Nkcgo_social-network__share-count">
-                  {count => count}
-                </GooglePlusShareCount>
+                  <div className="Nkcgo_social-network__share-count">
+                    &nbsp;
+                  </div>
+                </center>
               </div>
 
 
@@ -159,8 +130,8 @@ export default class BadgeComponent extends Component {
 
 const styles = {
   imageBadge: {
-    width: screen.width/3,
-    height: screen.width/3,
+    width: screen.width/4,
+    height: screen.width/4,
     justifyContent: 'center',
     alignItems: 'center'
   },
