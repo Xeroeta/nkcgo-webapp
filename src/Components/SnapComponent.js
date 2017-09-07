@@ -32,38 +32,55 @@ export default class SnapComponent extends Component {
         <div>
         {
           this.state.snaps.map((snap) => (
-            <div
-              key={snap.id}
-            >
-              <img
-                alt=""
-                src={appConfig.app.USER_UPLOAD_IMAGES_BASE_URL + snap.image_url}
-              />
-              <p>{snap.venue}</p>
-              {
-                snap.venue_title ?
-                  <p>Venue: {snap.venue_title}</p>
-                :
-                  <p></p>  
-              }
-              
-              {
-                snap.reviewed ?
-                  <p>Reviewed: Yes</p>
-                :
-                  <p>Reviewed: No</p>
-              }
-              {
-                snap.createdAt ?
-                  <p>Snap created at - {snap.createdAt}</p>
-                :
-                  <p></p>
-              }
-              
-            </div>
+            <center>
+              <div
+                key={snap.id}
+              >
+                {<p>------------------------------------------------------</p>}
+                {<p>   </p>}
+                <img
+                  alt=""
+                  style={{
+                    height:200,
+                    width:200
+                  }}
+                  src={appConfig.app.USER_UPLOAD_IMAGES_BASE_URL + snap.image_url}
+                />
+                {
+                  snap.venue_title ?
+                    <p style={styles.venueTitle}>{snap.venue_title}</p>
+                  :
+                    <p></p>
+                }
+
+                {
+                  snap.reviewed ?
+                    <div>Reviewed: Yes</div>
+                  :
+                    <div>Reviewed: No</div>
+                }
+                {
+                  snap.createdAt ?
+                    <p>Snap created at - {snap.createdAt}</p>
+                  :
+                    <p></p>
+                }
+                {<p>------------------------------------------------------</p>}
+                {<p>   </p>}
+
+              </div>
+            </center>
           ))
       }
       </div>
     );
   }
 }
+
+const styles = {
+  venueTitle: {
+    color: '#03c',
+    fontSize: 20,
+    fontWeight: 'bold',
+  }
+};
