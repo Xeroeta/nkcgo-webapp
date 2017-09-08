@@ -61,7 +61,7 @@ export default class SnapComponent extends Component {
                 }
                 {
                   snap.createdAt ?
-                    <p>Snap created at - {snap.createdAt}</p>
+                    <p>Snap created at - {new Date(snap.createdAt).toString()}</p>
                   :
                     <p></p>
                 }
