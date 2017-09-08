@@ -74,12 +74,12 @@ export default class BadgeComponent extends Component {
           this.state.badges.map((mybadge) => (
             <div
               style={styles.badgeInfo}
-              key={mybadge.key}
+              key={mybadge.id}
             >
               <center>
                 <img style={styles.imageBadge}
                   alt=""
-                  src={mybadge.image}
+                  src={mybadge.image_url}
                 />
                 <p style={styles.badgeTitle}>{mybadge.badgeName}{'\n\n'}</p>
               </center>

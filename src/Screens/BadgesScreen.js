@@ -30,17 +30,18 @@ export default class BadgesScreen extends Component {
       this.login();
     }
 
-    fetch(appConfig.app.API_BASE_URL+'badges', {
+    fetch(appConfig.app.API_BASE_URL + 'user-badges', {
       method: 'GET',
       headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
-                'Authorization': userIdToken_temp
+                'Authorization': 'Bearer ' + userIdToken_temp
                 }
     })
       .then(response => response.json())
       .then((responseData) => { 
-        console.log(JSON.parse(responseData.body));
+        console.log(responseData);
+        // console.log(JSON.parse(responseData));
         //JSON.parse(responseData.body)
         this.setState({ badges: JSON.parse(responseData.body) }); 
       });

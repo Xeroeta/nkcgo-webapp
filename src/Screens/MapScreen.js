@@ -1,15 +1,17 @@
 import React, { Component } from 'react';
 import ReactDOM from 'react-dom';
-import {Map, InfoWindow, Marker, Polygon, GoogleApiWrapper} from 'google-maps-react';
+// import {Map, InfoWindow, Marker, Polygon, GoogleApiWrapper} from 'google-maps-react';
 import history from '../history';
 import { poiClusters } from '../Config/sampleMapClusters';
 import appConfig from '../Config/params';
+
+import MapComponent from '../Components/MapComponent';
 
 const map_key = appConfig.googlemaps.key;
 const POIClustersData = poiClusters;
 const DEFAULT_PADDING = { top: 40, right: 40, bottom: 40, left: 40 };
 
-export class MapScreen extends React.Component {
+export default class MapScreen extends React.Component {
 
   constructor(props) {
     super(props);
@@ -18,6 +20,10 @@ export class MapScreen extends React.Component {
     this.updateWindowDimensions = this.updateWindowDimensions.bind(this);
 
     this.mapMarkers = this.parseMarkers();
+
+    this.state.mapDataLoaded = false;
+    this.state.mapMarkersData = [];
+    this.state.mapClustersData = [];
 
     this.state.selectedCluster = 0;
     this.polygons = poiClusters;
@@ -29,7 +35,61 @@ export class MapScreen extends React.Component {
 
   componentWillMount() {
 
+    fetch(appConfig.app.API_BASE_URL+'clusters')
+      .then(response => response.json(true))
+      .then((responseData) => {
+        // console.log(JSON.parse(responseData.body));
+        // venue.showInMap = "Yes"
+        let apiResponseData = JSON.parse(responseData.body);
+        let allMarkersData = apiResponseData.markers;
+        let allClustersData = apiResponseData.clusters;
+        let tempMarkersData= [];
+        let tempClustersData = [];
+        for (var i = 0; i < allMarkersData.length; i++) {
+          if(allMarkersData[i].showInMap == "Yes")
+          {
+            allMarkersData[i].latlng = {
+              lat: allMarkersData[i].latlng.latitude,
+              lng: allMarkersData[i].latlng.longitude
+            };
+            tempMarkersData.push(allMarkersData[i]);
+          }
+        }
+        for (var i = 0; i < allClustersData.length; i++) {
+          let tmpData = allClustersData[i];
+          tmpData.coordinates = this.transformClusterCoordinates(allClustersData[i].coordinates);
+          // tmpData.coordinates = allClustersData[i].coordinates;
+          tempClustersData.push(tmpData);
+        }
+        
+        console.log("allMarkersData - ");
+        console.log(allMarkersData.length);
+        console.log("markers to show on map Data - ");
+        console.log(tempMarkersData);
+        console.log("all clusters Data - ");
+        console.log(tempClustersData);
+
+        this.setState({ mapMarkersData: tempMarkersData });
+        this.setState({ mapClustersData: tempClustersData });
+        this.setState({ mapDataLoaded: true });
+
+      });
+
     }
+
+  transformClusterCoordinates(inputCoordinates)
+  {
+    let tmpData = [];
+    for (let j = 0; j < inputCoordinates.length; j++) {
+      
+      tmpData.push({
+        lat: inputCoordinates[j].latitude,
+        lng: inputCoordinates[j].longitude
+      });
+    }
+    return tmpData;
+  }
+
   val2key(val,array){
     for (var key in array) {
       let this_val = array[key];
@@ -165,59 +225,20 @@ export class MapScreen extends React.Component {
   render() {
          // markerPoint = new this.props.google.maps.Point(32,32)
          // markerSize = new this.props.google.maps.Size(64,64)
+        //<MapComponent initialRegion={this.initialRegion} mapMarkers={this.state.mapMarkersData} mapClusters={this.state.mapClustersData} />
+        return (
+          <div>
+          {
+            this.state.mapDataLoaded ? 
+            <span> 
+              <MapComponent initialRegion={this.initialRegion} mapMarkers={this.state.mapMarkersData} mapClusters={this.state.mapClustersData} />
+            </span>
+            :
+            <span> Loading maps data, please wait.</span>
+          }
+          </div>
+        );
 
-    return (
-      <Map 
-        ref={ref => { this.map = ref; }}
-        google={this.props.google} 
-        zoom={15}
-        style={style}
-        initialCenter={this.initialRegion}
-        onClick={e => this.onMapClicked(e)}
-        visible={true}
-      >
-
-
-
-      {
-
-        this.mapMarkers.map(marker => (
-          <Marker
-            key={marker.venueID}
-            position={marker.latlng}
-            name={marker.title}
-            onClick={e => this.onMarkerClick(e, marker.venueID)}
-            icon={{
-              url: marker.markerImage,
-              anchor: {x: parseFloat(32), y: parseFloat(32)},
-              scaledSize: {width: parseFloat(64), height: parseFloat(64), f: "px", j: "px"}
-            }}
-          >
-            
-          </Marker>
-          )
-        )
-      }
-      {
-        this.polygons.map(polygon => (
-          <Polygon
-            key={polygon.polygon.key}
-            onClick={e => this.onPolygonClick(e, polygon.polygon.key)}
-            paths={polygon.polygonOverlay.coordinates}
-            strokeColor="#00FFFF"
-            strokeOpacity={0.8}
-            strokeWeight={2}
-            fillColor="#00FFFF"
-            fillOpacity={0.35}
-          />
-          )
-        )
-      }
-
-
-      </Map>
-
-      );
   }
 }
 
@@ -225,7 +246,3 @@ const style = {
   width: '100%',
   height: '100%'
 }
-
-export default GoogleApiWrapper({
-  apiKey: (map_key)
-})(MapScreen)
