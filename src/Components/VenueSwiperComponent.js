@@ -209,6 +209,8 @@ export default class VenueSwiperComponent extends Component {
                   </div>
                 </div>
               </div>
+              <p style={styles.venueSpecialOffer}>{venue.notes}</p>
+              <p style={styles.venueScavengerHint}>{venue.notes2}</p>
             </center>
             </div>
           ))
@@ -237,5 +239,16 @@ const styles = {
     color: '#09c',
     fontSize: 20,
     fontWeight: 'normal',
+  },
+  venueSpecialOffer: {
+    color: '#000',
+    fontSize: 20,
+    fontWeight: 'normal',
+  },
+  venueScavengerHint: {
+    color: '#000',
+    fontSize: 20,
+    fontWeight: 'normal',
   }
+
 };
