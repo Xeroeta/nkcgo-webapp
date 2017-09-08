@@ -52,7 +52,8 @@ export default class SnapScreen extends Component {
         //JSON.parse(responseData.body)
         
         this.setState({ snapsLoaded: true }); 
-        this.setState({ SnapsData: JSON.parse(responseData.body) }); 
+        this.setState({ SnapsData: this.sortSnaps(JSON.parse(responseData.body)) }); 
+        // this.setState({ SnapsData: JSON.parse(responseData.body) }); 
       })
       .catch((err) => { 
         this.displayErrorMessage("Failed to load yous snaps from server. Please try again");
@@ -60,6 +61,21 @@ export default class SnapScreen extends Component {
       });
       ;
   }
+
+  sortSnaps(snapsDataArray){
+     let len = snapsDataArray.length;
+     for (let i = len-1; i>=0; i--){
+       for(let j = 1; j<=i; j++){
+         if(snapsDataArray[j-1].createdAt < snapsDataArray[j].createdAt){
+             let temp = snapsDataArray[j-1];
+             snapsDataArray[j-1] = snapsDataArray[j];
+             snapsDataArray[j] = temp;
+          }
+       }
+     }
+     return snapsDataArray;
+  }
+
   displayErrorMessage(message)
   {
     this.setState({errorMessage: message});

@@ -1,7 +1,28 @@
 import React, { Component } from 'react';
 import appConfig from '../Config/params';
 
-// const UI_IMAGES_BASE_URL = 'https://s3.us-east-2.amazonaws.com/swiftmile-app-assets/';
+
+import {
+  ShareButtons,
+  ShareCounts,
+  generateShareIcon,
+} from 'react-share';
+
+const {
+  FacebookShareButton,
+  TwitterShareButton
+} = ShareButtons;
+
+const {
+  FacebookShareCount,
+} = ShareCounts;
+
+const FacebookIcon = generateShareIcon('facebook');
+const TwitterIcon = generateShareIcon('twitter');
+
+const shareUrl = 'https://nkcgo.com';
+const title = 'NKCGo!';
+const hashTags = ['NKCGo', 'SwiftMile', 'PintPath', 'NKC'];
 
 export default class SnapComponent extends Component {
 
@@ -61,12 +82,41 @@ export default class SnapComponent extends Component {
                 }
                 {
                   snap.createdAt ?
-                    <p>Snap created at - {new Date(snap.createdAt).toString()}</p>
+                    <p>Snap created at - { new Date(snap.createdAt).toLocaleTimeString("en-us", { weekday: "long", year: "numeric", month: "short", day: "numeric", hour: "2-digit", minute: "2-digit"})}</p>
                   :
                     <p></p>
                 }
                 {<p>------------------------------------------------------</p>}
                 {<p>   </p>}
+
+              <div className="Nkcgo_social-network">
+                <center>
+                <div className="row">
+                  <FacebookShareButton
+                    url={shareUrl}
+                    title={title}
+                    description={snap.venue_title}
+                    picture={appConfig.app.USER_UPLOAD_IMAGES_BASE_URL + snap.image_url}
+                    quote={title + snap.venue_title}
+                    className="Nkcgo_social-network__share-button">
+                    <FacebookIcon
+                      size={32}
+                      round />
+                  </FacebookShareButton>
+                  <TwitterShareButton
+                    url={shareUrl}
+                    title={title}
+                    via={title}
+                    hashtags={hashTags}
+                    className="Nkcgo_social-network__share-button">
+                    <TwitterIcon
+                      size={32}
+                      round />
+                  </TwitterShareButton>
+                  </div>
+                </center>
+              </div>
+
 
               </div>
             </center>
