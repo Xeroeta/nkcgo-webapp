@@ -111,7 +111,7 @@ export default class UploadSnapScreen extends React.Component {
       })
       .then((signedUrlData) => {
         let bb_imageSrc = imageSrc;
-        console.log("URL");
+        console.log("S3 Signed URL (Received from LAMBDA)- ");
         console.log(signedUrlData.url);
         console.log("ImageData");
         console.log(bb_imageSrc);
@@ -181,7 +181,7 @@ export default class UploadSnapScreen extends React.Component {
   
   render() {
     return (
-      <div>
+      <div style={styles.dropzoneContainer}>
       {
         this.state.successMessage && this.state.successMessage.length?
           <span>Success - { this.state.successMessage }</span>
@@ -199,15 +199,45 @@ export default class UploadSnapScreen extends React.Component {
         this.state.isLoading?
         <span>Updating your snap Please wait.</span>
         :
-        <section>
-          <div className="dropzone">
-            <Dropzone onDrop={this.onDrop.bind(this)} disabled={this.state.dropzoneDisabled}>
+        <center>
+          <Dropzone 
+            onDrop={this.onDrop.bind(this)} 
+            style={styles.dropZone} 
+            disabledStyle={styles.disabledStyle}
+            multiple={false}
+            disabled={this.state.dropzoneDisabled}
+          >
+           { 
+            this.state.dropzoneDisabled ?
+              <p>Uploading your snaps, please wait</p>
+            :
               <p>Click to select image to upload.</p>
-            </Dropzone>
-          </div>
-        </section>
+            }
+          </Dropzone>
+        </center>
       }
       </div>
     );
+  }
+}
+
+const styles = {
+  dropZone: {
+    color: '#03c',
+    backgroundColor: '#e9fdff',
+    width: '200px',
+    height: '200px',
+    fontSize: '20px'
+  },
+  disabledStyle: {
+    color: 'rgb(220, 227, 245)',
+    backgroundColor: 'rgb(245, 247, 247)',
+    width: '200px',
+    height: '200px',
+    fontSize: '20px'
+
+  },
+  dropzoneContainer:{
+    marginTop: '30px'
   }
 }
