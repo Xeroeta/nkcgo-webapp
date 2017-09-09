@@ -129,13 +129,27 @@ export default class VenueSwiperComponent extends Component {
 
     return (
       <div className="slider-wrapper">
-        <Button
-          bsStyle="primary"
-          className="btn-margin"
-          onClick={this.goToPreviousSlide.bind(this)}
-        >
-          {'<<'} Previous
-        </Button>
+        <div className="row">
+          <div className="col-xs-6 text-left">
+            <Button
+              bsStyle="primary"
+              className="btn-margin"
+              onClick={this.goToPreviousSlide.bind(this)}
+            >
+              {'<<'} Previous
+            </Button>
+          </div>
+          <div className="col-xs-6 text-right">   
+            <Button
+              bsStyle="primary"
+              className="btn-margin"
+              onClick={this.goToNextSlide.bind(this)}
+            >
+              Next {'>>'}
+            </Button>
+          </div>
+        </div>
+
         <ReactSwipe
           key={this.state.VenuesData.length}
           ref={ref => { this.swiper = ref; }}
@@ -209,18 +223,13 @@ export default class VenueSwiperComponent extends Component {
                   </div>
                 </div>
               </div>
+              <p style={styles.venueSpecialOffer}>{venue.notes}</p>
+              <p style={styles.venueScavengerHint}>{venue.notes2}</p>
             </center>
             </div>
           ))
         }
         </ReactSwipe>
-        <Button
-          bsStyle="primary"
-          className="btn-margin"
-          onClick={this.goToNextSlide.bind(this)}
-        >
-          Next {'>>'}
-        </Button>
 
       </div>
     );
@@ -235,7 +244,18 @@ const styles = {
   },
   venueDescription: {
     color: '#09c',
-    fontSize: 20,
+    fontSize: 17,
+    fontWeight: 'normal',
+  },
+  venueSpecialOffer: {
+    color: '#000',
+    fontSize: 17,
+    fontWeight: 'normal',
+  },
+  venueScavengerHint: {
+    color: '#000',
+    fontSize: 17,
     fontWeight: 'normal',
   }
+
 };

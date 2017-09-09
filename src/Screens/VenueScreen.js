@@ -37,7 +37,21 @@ export default class VenueScreen extends Component {
       .then((responseData) => { 
         console.log(JSON.parse(responseData.body));
         //JSON.parse(responseData.body)
-        this.setState({ VenuesData: JSON.parse(responseData.body) }); 
+        // venue.showInVenueList = "Yes"
+        let allVenuesData = JSON.parse(responseData.body);
+        let tempVenuesData = [];
+        for (var i = 0; i < allVenuesData.length; i++) {
+          if(allVenuesData[i].showInVenueList == "Yes")
+          {
+            tempVenuesData.push(allVenuesData[i]);
+          }
+        }
+        console.log("allVenuesData - ");
+        console.log(allVenuesData.length);
+        console.log("Valid POIS Data - ");
+        console.log(tempVenuesData.length);
+
+        this.setState({ VenuesData: tempVenuesData }); 
       });
   }
 
