@@ -44,7 +44,7 @@ export class MapComponent extends Component {
   {
 
   }
-  
+
   goTo(route) {
     this.props.history.replace(`/${route}`);
   }
@@ -52,16 +52,33 @@ export class MapComponent extends Component {
   render() {
 
     return (
-      <Map 
+      <Map
         ref={ref => { this.map = ref; }}
-        google={this.props.google} 
+        google={this.props.google}
         zoom={15}
         style={style}
         initialCenter={this.initialRegion}
         onClick={e => this.onMapClicked(e)}
         visible={true}
       >
-
+      {
+        (
+          this.state.mapClusters.length) && (
+          this.state.mapClusters.map(cluster => (
+            <Polygon
+              key={cluster.key}
+              onClick={e => this.onPolygonClick(e, cluster.key)}
+              paths={cluster.coordinates}
+              strokeColor={cluster.strokeColor}
+              strokeOpacity={0.85}
+              strokeWeight={3}
+              fillColor={cluster.strokeColor}
+              fillOpacity={0.30}
+            />
+            )
+          )
+        )
+      }
       {
         this.state.mapMarkers.map(marker => (
           <Marker
@@ -78,24 +95,7 @@ export class MapComponent extends Component {
           )
         )
       }
-      {
-        (
-          this.state.mapClusters.length) && (
-          this.state.mapClusters.map(cluster => (
-            <Polygon
-              key={cluster.key}
-              onClick={e => this.onPolygonClick(e, cluster.key)}
-              paths={cluster.coordinates}
-              strokeColor="#00FFFF"
-              strokeOpacity={0.8}
-              strokeWeight={2}
-              fillColor="#00FFFF"
-              fillOpacity={0.35}
-            />
-            )
-          )
-        )
-      }
+
       </Map>
     );
   }
