@@ -9,8 +9,8 @@
                 "showInMap": {"S": "Yes"},
                 "showInVenueList": {"S": "No"},
                 "latlng":{"M":  {
-                    "latitude": {"N": "39.1330928"},
-                    "longitude": {"N": "-94.5774409"}
+                    "latitude": {"N": "39.135622"},
+                    "longitude": {"N": "-94.577314"}
                   }
                 },
                 "title": {"S": "The Swift Mile Vendor Market"},

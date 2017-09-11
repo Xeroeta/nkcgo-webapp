@@ -70,6 +70,12 @@ export default class BadgeComponent extends Component {
 
     return (
         <div>
+          <center>
+          <p style={styles.introText}> If you see any badge below, you can claim your associated badges from the NKC Business Council at 320 Armour Road (suite 220, 2nd floor) from 8:30 AM to 3:30 PM on Tuesday (12 Sept) to Thursday (14 Sept).</p>
+          <p style={styles.navigationText}> <a href='https://www.google.com/maps/dir/?api=1&dir_action=navigate&travelmode=walking&destination=320 Armour Road, North Kansas City, MO 64116'>(Navigate to the NKC Business Council building.) </a> </p>
+          <p> -------------------------------  </p>
+          </center>
+
         {
           this.state.badges.map((mybadge) => (
             <div
@@ -140,5 +146,15 @@ const styles = {
   },
   badgeInfo: {
     marginBottom: 10
+  },
+  introText: {
+    color: '#000',
+    fontSize: 20,
+    fontWeight: 'bold',
+  },
+  navigationText: {
+    color: '#000',
+    fontSize: 16,
+    fontWeight: 'bold',
   }
 };

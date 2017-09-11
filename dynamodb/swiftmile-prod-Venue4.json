@@ -75,8 +75,8 @@
                 "showInMap": {"S": "Yes"},
                 "showInVenueList": {"S": "No"},
                 "latlng":{"M":  {
-                    "latitude": {"N": "39.1400596"},
-                    "longitude": {"N": "-94.5773653"}
+                    "latitude": {"N": "39.140229"},
+                    "longitude": {"N": "-94.577306"}
                   }
                 },
                 "title": {"S": "Bus Stop #4"},
@@ -207,8 +207,8 @@
                 "showInMap": {"S": "Yes"},
                 "showInVenueList": {"S": "No"},
                 "latlng":{"M":  {
-                    "latitude": {"N": "39.1400596"},
-                    "longitude": {"N": "-94.5773653"}
+                    "latitude": {"N": "39.140115"},
+                    "longitude": {"N": "-94.577298"}
                   }
                 },
                 "title": {"S": "Bike Share Station #2"},

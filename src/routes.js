@@ -15,6 +15,7 @@ import BadgesScreen from './Screens/BadgesScreen'
 import SnapScreen from './Screens/SnapScreen'
 import CameraScreen from './Screens/CameraScreen'
 import UploadSnapScreen from './Screens/UploadSnapScreen'
+import AboutScreen from './Screens/AboutScreen'
 import Callback from './Callback/Callback';
 /* Screens end */
 
@@ -57,12 +58,12 @@ function checkOrCreateUser(id_token)
                 }
     })
     .then(response => response.json(true))
-    .then((responseData) => { 
+    .then((responseData) => {
       let user = JSON.parse(responseData.body);
       localStorage.setItem('user_id', user.id);
       console.log(JSON.parse(responseData.body));
       //JSON.parse(responseData.body)
-      
+
     });
 }
 
@@ -80,10 +81,11 @@ export const makeMainRoutes = () => {
           <Route path="/snaps" render={(props) => <SnapScreen auth={auth} {...props} />} />
           <Route path="/camera" render={(props) => <CameraScreen auth={auth} {...props} />} />
           <Route path="/upload" render={(props) => <UploadSnapScreen auth={auth} {...props} />} />
+          <Route path="/about" render={(props) => <AboutScreen auth={auth} {...props} />} />
 
           <Route path="/callback" render={(props) => {
             handleAuthentication(props);
-            return <Callback {...props} /> 
+            return <Callback {...props} />
           }}/>
         </div>
       </Router>

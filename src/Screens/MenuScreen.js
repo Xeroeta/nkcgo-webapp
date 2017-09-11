@@ -12,9 +12,9 @@ class MenuScreen extends Component {
   }
 
   componentWillMount() {
-    
+
   }
-  
+
   render() {
     return (
       <div style={styles.container} >
@@ -44,7 +44,7 @@ class MenuScreen extends Component {
               />
             </a>
           </div>
-          
+
           <div className="row" style={styles.divButton}>
             <a
               // onClick={this.goTo.bind(this, 'map')}
@@ -93,6 +93,24 @@ class MenuScreen extends Component {
               />
             </a>
           </div>
+
+          <div className="row">
+            <a href='https://s3.us-east-2.amazonaws.com/swiftmile-app-assets/ui-images/FAQ.html'>
+              <img style={ styles.btn } src={appConfig.app.UI_IMAGES_BASE_URL+'MainMenu-FAQButton.png'}/>
+            </a>
+          </div>
+
+          <div className="row">
+            <a
+              >
+              <img
+                style={ styles.btn }
+                src={appConfig.app.UI_IMAGES_BASE_URL+"MainMenu-AboutButton.png"}
+                onClick={this.goTo.bind(this, 'about')}
+              />
+            </a>
+          </div>
+
         </center>
       </div>
 

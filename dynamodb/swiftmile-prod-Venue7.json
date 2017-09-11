@@ -17,8 +17,8 @@
                 "description": {"S": " --- "},
                 "notes": {"S": " --- "},
                 "notes2": {"S": " --- "},
-                "image": {"S": "https://s3.us-east-2.amazonaws.com/swiftmile-app-assets/app-images/map-pois/XPlaceholder.png"},
-                "markerImage": {"S":"https://s3.us-east-2.amazonaws.com/swiftmile-app-assets/app-images/map-markers/XPlaceholder.png"}
+                "image": {"S": "https://s3.us-east-2.amazonaws.com/swiftmile-app-assets/app-images/map-pois/Stage1.png"},
+                "markerImage": {"S":"https://s3.us-east-2.amazonaws.com/swiftmile-app-assets/app-images/map-markers/Stage1.png"}
             }
           }
       },
@@ -39,8 +39,8 @@
                 "description": {"S": " --- "},
                 "notes": {"S": " --- "},
                 "notes2": {"S": " --- "},
-                "image": {"S": "https://s3.us-east-2.amazonaws.com/swiftmile-app-assets/app-images/map-pois/XPlaceholder.png"},
-                "markerImage": {"S":"https://s3.us-east-2.amazonaws.com/swiftmile-app-assets/app-images/map-markers/XPlaceholder.png"}
+                "image": {"S": "https://s3.us-east-2.amazonaws.com/swiftmile-app-assets/app-images/map-pois/Stage2.png"},
+                "markerImage": {"S":"https://s3.us-east-2.amazonaws.com/swiftmile-app-assets/app-images/map-markers/Stage2.png"}
             }
           }
       },
@@ -53,16 +53,16 @@
                 "showInMap": {"S": "Yes"},
                 "showInVenueList": {"S": "No"},
                 "latlng":{"M":  {
-                    "latitude": {"N": "39.1400596"},
-                    "longitude": {"N": "-94.5773653"}
+                    "latitude": {"N": "39.140088"},
+                    "longitude": {"N": "-94.577504"}
                   }
                 },
                 "title": {"S": "Stage 3"},
                 "description": {"S": " --- "},
                 "notes": {"S": " --- "},
                 "notes2": {"S": " --- "},
-                "image": {"S": "https://s3.us-east-2.amazonaws.com/swiftmile-app-assets/app-images/map-pois/XPlaceholder.png"},
-                "markerImage": {"S":"https://s3.us-east-2.amazonaws.com/swiftmile-app-assets/app-images/map-markers/XPlaceholder.png"}
+                "image": {"S": "https://s3.us-east-2.amazonaws.com/swiftmile-app-assets/app-images/map-pois/Stage3.png"},
+                "markerImage": {"S":"https://s3.us-east-2.amazonaws.com/swiftmile-app-assets/app-images/map-markers/Stage3.png"}
             }
           }
       }
