@@ -32,10 +32,27 @@ const handleAuthentication = (nextState, replace) => {
     // console.log(parsedHash);
     /* Set data in local storage */
     setSession(parsedHash);
-    /* Check on server if user exists and store user */
-    checkOrCreateUser(parsedHash.id_token);
-    /* handle auth */
-    auth.handleAuthentication();
+    
+    var profile = {};
+    const { userProfile, getProfile } = auth;
+    if (!userProfile) {
+        console.log("Getting Auth0 profile");
+      getProfile((err, profile) => {
+        console.log("Got Auth0 profile");  
+        console.log(profile);  
+//        profile = profile;
+        /* Check on server if user exists and store user */
+        checkOrCreateUser(parsedHash.id_token, profile);
+        /* handle auth */
+        auth.handleAuthentication();
+      });
+    } else {
+      profile = userProfile;
+      /* Check on server if user exists and store user */
+      checkOrCreateUser(parsedHash.id_token, profile);
+      /* handle auth */
+      auth.handleAuthentication();
+    }
   }
 }
 
@@ -47,15 +64,18 @@ function setSession(authResult) {
   localStorage.setItem('expires_at', expiresAt);
 }
 
-function checkOrCreateUser(id_token)
+function checkOrCreateUser(id_token, profile)
 {
+    console.log("PROFILE.");
+    console.log(profile);
   fetch(API_BASE_URL+'users', {
       method: 'POST',
       headers: {
                 'Accept': 'application/json',
                 'Content-Type': 'application/json',
                 'Authorization': 'Bearer ' + id_token
-                }
+                },
+      body: JSON.stringify(profile)
     })
     .then(response => response.json(true))
     .then((responseData) => {
