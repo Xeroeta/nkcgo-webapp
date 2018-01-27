@@ -67,7 +67,8 @@ class App extends Component {
             <a>
               <img
                 style={ styles.btnNKCGo }
-                src={appConfig.app.UI_IMAGES_BASE_URL+'NKCGoAppIcon3.png'}
+                //src={appConfig.app.UI_IMAGES_BASE_URL+'NKCGoAppIcon3.png'}
+                src={appConfig.app.UI_IMAGES_BASE_URL+'NKCBarWars_Logo.png'}
                 onClick={this.goTo.bind(this, 'menu')}
               />
             </a>

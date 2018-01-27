@@ -20,9 +20,10 @@ const {
 const FacebookIcon = generateShareIcon('facebook');
 const TwitterIcon = generateShareIcon('twitter');
 
-const shareUrl = 'https://nkcgo.com';
-const title = 'NKCGo!';
-const hashTags = ['NKCGo', 'SwiftMile', 'PintPath', 'NKC'];
+const shareUrl = 'https://nkcbarwars.com';
+const title = 'NKC Bar Wars! ';
+//const hashTags = ['NKCBarWars', 'SwiftMile', 'PintPath', 'NKC'];
+const hashTags = ['NKCBarWars'];
 
 export default class SnapComponent extends Component {
 
@@ -86,6 +87,7 @@ export default class SnapComponent extends Component {
                   :
                     <p></p>
                 }
+{/*
                 {<p>------------------------------------------------------</p>}
                 {<p>   </p>}
 
@@ -116,7 +118,7 @@ export default class SnapComponent extends Component {
                   </div>
                 </center>
               </div>
-
+*/ }
 
               </div>
             </center>

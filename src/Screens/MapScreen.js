@@ -29,7 +29,8 @@ export default class MapScreen extends React.Component {
     this.polygons = poiClusters;
     this.initialRegion = {
             lat: 39.135452,
-            lng: -94.577164
+            //lng: -94.577164
+            lng: -94.577350
           };
   }
 

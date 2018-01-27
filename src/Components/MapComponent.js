@@ -17,8 +17,10 @@ export class MapComponent extends Component {
     console.log('initial Props');
     console.log(props);
     this.initialRegion = {
-            lat: 39.135452,
-            lng: -94.577164
+            //lat: 39.135452,
+            lat: 39.133446,
+            //lng: -94.577164
+            lng: -94.577145
           };
   }
   componentWillReceiveProps(nextProps) {

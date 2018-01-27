@@ -25,13 +25,13 @@ class MenuScreen extends Component {
             <img
               style={ styles.logo }
 
-              src={appConfig.app.UI_IMAGES_BASE_URL + "AppLoadingSplashPage-SwiftMile.png"}
+              src={appConfig.app.UI_IMAGES_BASE_URL + "NKCBarWars_Logo.png"}
             />
 
             <img
               style={ styles.logo }
 
-              src={appConfig.app.UI_IMAGES_BASE_URL + "AppLoadingSplashPagePintPathLogo.png"}
+              src={appConfig.app.UI_IMAGES_BASE_URL + "AnnouncementLogo_TopRight.png"}
             />
           </div>
           <div className="row">
@@ -69,6 +69,7 @@ class MenuScreen extends Component {
               />
             </a>
           </div>
+
           <div className="row" >
             <a
               // onClick={this.goTo.bind(this, 'badges')}
@@ -81,6 +82,7 @@ class MenuScreen extends Component {
               />
             </a>
           </div>
+
           <div className="row" >
             <a
               // style={ styles.btn }
@@ -160,7 +162,7 @@ const styles = {
   },
   logo: {
     width: 150,
-    height: 150,
+    height: 100,
     paddingTop: 3,
     padding: 3,
     resizeMode: 'contain',
