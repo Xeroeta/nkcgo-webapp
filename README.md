@@ -1,6 +1,6 @@
-# NKCGo WebApp
+# NKC WebApp
 
-NKCGo WebApp
+NKC WebApp
 
 ## Getting Started
 
@@ -34,10 +34,8 @@ yarn  build
 
 ## Author
 
-[NKCGo](http://nkcgo.com)
+[NKCApp](http://nkcapp.com)
 
 ## License
 
 This project is licensed under the MIT license. See the [LICENSE](LICENSE.txt) file for more info.
-
-
